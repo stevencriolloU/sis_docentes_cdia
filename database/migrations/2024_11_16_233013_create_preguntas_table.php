@@ -12,8 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('preguntas', function (Blueprint $table) {
-            $table->id();
+            
+            $table->id('id_pregunta');
+            $table->unsignedBigInteger('id_encuesta')->nullable();
+            $table->text('texto_pregunta');
+            $table->enum('Type', ['short_text', 'multiple_choice', 'single_choice']);
+            $table->foreign('id_encuesta')->references('id_encuesta')->on('encuestas');
             $table->timestamps();
+
         });
     }
 

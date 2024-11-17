@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('paralelos', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_paralelo');
+            $table->string('nombre_paralelo', 50);
             $table->timestamps();
         });
     }

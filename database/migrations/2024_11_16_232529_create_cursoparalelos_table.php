@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cursoparalelos', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_curso_paralelo');
+            $table->unsignedBigInteger('id_curso')->nullable();
+            $table->unsignedBigInteger('id_paralelo')->nullable();
+            $table->foreign('id_curso')->references('id_curso')->on('cursos');
+            $table->foreign('id_paralelo')->references('id_paralelo')->on('paralelos');
             $table->timestamps();
         });
     }
