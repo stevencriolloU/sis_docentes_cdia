@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
+use Illuminate\Http\RedirectResponse;
+use Laravel\Fortify\Contracts\LoginResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -20,7 +22,21 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->instance(LoginResponse::class, new class implements LoginResponse {
+            public function toResponse($request): RedirectResponse
+            {
+                $user = $request->user(); 
+
+                // Redirigir al dashboard correspondiente según el rol del usuario
+                if ($user->hasRole('admin')) {
+                    return redirect()->route('admin.dashboard');
+                } elseif ($user->hasRole('docente')) {
+                    return redirect()->route('docente.dashboard');
+                } else {
+                    return redirect()->route('estudiante.dashboard');
+                }
+                }
+        });
     }
 
     /**
@@ -42,5 +58,6 @@ class FortifyServiceProvider extends ServiceProvider
         RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
+        
     }
 }
