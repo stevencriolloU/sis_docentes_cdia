@@ -32,8 +32,9 @@
                             <nav class="-mx-3 flex flex-1 justify-end text-white">
                                 @auth
                                     <a
-                                        href="{{ url('/dashboard') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]"
+                                        href="{{ route(Auth::user()->hasRole('admin') ? 'admin.dashboard' : (Auth::user()->hasRole('docente') ? 'docente.dashboard' : 'estudiante.dashboard')) }}"
+
+                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]">
                                     >
                                         Dashboard
                                     </a>
@@ -77,14 +78,7 @@
                                 </ul>                            
                             </div>        
                         </div>                        
-                    </main>
-<!--
-                    <footer class="py-16 text-center text-sm text-black">                 
-                               
-                        <p>Sitio construido con </p>
-                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-                    </footer>
--->
+                    </main>            
                 </div>
             </div>
         </div>
