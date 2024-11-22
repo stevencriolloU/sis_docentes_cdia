@@ -1,10 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\EstudianteController;
+use Illuminate\Http\Request;
+
+
 
 
 Route::get('/', function () {
@@ -31,4 +35,17 @@ Route::middleware('role:admin')->group(function () {
     Route::post('admin/users/{user}/update-role', [UserRoleController::class, 'update'])->name('admin.users.update-role');
 });
 
+
 Route::resource('cursos', App\Http\Controllers\CursoController::class);
+Route::resource('docentes', App\Http\Controllers\DocenteController::class);
+
+Route::get('/buscar-usuario', function (Request $request) {
+    $email = $request->get('email');
+    if($email) {
+        $users = User::where('email', 'like', "%$email%")->get();
+    } else {
+        $users = [];
+    }
+
+    return response()->json($users);  // Retorna los resultados en formato JSON
+});
