@@ -23,9 +23,12 @@ Route::middleware([
 })->name('dashboard');
 
 
+
 // Rutas solo accesibles por el rol 'admin'
 Route::middleware('role:admin')->group(function () {
     Route::get('/admin_dashboard', [AdminController::class, 'index'])->name('admin.index');
     Route::get('admin/users', [UserRoleController::class, 'index'])->name('admin.users.index');
     Route::post('admin/users/{user}/update-role', [UserRoleController::class, 'update'])->name('admin.users.update-role');
 });
+
+Route::resource('cursos', App\Http\Controllers\CursoController::class);

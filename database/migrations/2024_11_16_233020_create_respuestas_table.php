@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('respuestas', function (Blueprint $table) {
             
-            $table->id('id_respuesta');
+            $table->id(); // Crea la columna 'id' autoincrementable
             $table->unsignedBigInteger('id_encuesta')->nullable();
             $table->unsignedBigInteger('id_pregunta')->nullable();
             $table->unsignedBigInteger('id_usuario')->nullable();
             $table->text('respuesta');
-            $table->foreign('id_encuesta')->references('id_encuesta')->on('encuestas');
-            $table->foreign('id_pregunta')->references('id_pregunta')->on('preguntas');
+            $table->foreign('id_encuesta')->references('id')->on('encuestas');
+            $table->foreign('id_pregunta')->references('id')->on('preguntas');
             $table->foreign('id_usuario')->references('id')->on('users');
             $table->timestamps();
         });

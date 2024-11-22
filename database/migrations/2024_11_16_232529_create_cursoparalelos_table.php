@@ -12,13 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cursoparalelos', function (Blueprint $table) {
-            $table->id('id_curso_paralelo');
-            $table->unsignedBigInteger('id_curso')->nullable();
-            $table->unsignedBigInteger('id_paralelo')->nullable();
-            $table->foreign('id_curso')->references('id_curso')->on('cursos');
-            $table->foreign('id_paralelo')->references('id_paralelo')->on('paralelos');
+            $table->id(); // Crea la columna 'id' autoincrementable
+            $table->unsignedBigInteger('id_curso')->nullable(); // Columna para la relación con 'cursos'
+            $table->unsignedBigInteger('id_paralelo')->nullable(); // Columna para la relación con 'paralelos'
+            // Definición de las claves foráneas
+            $table->foreign('id_curso')->references('id')->on('cursos')->onDelete('set null'); // Relación con 'cursos'
+            $table->foreign('id_paralelo')->references('id')->on('paralelos')->onDelete('set null'); // Relación con 'paralelos'
             $table->timestamps();
         });
+        
     }
 
     /**

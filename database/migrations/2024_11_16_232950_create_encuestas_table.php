@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('encuestas', function (Blueprint $table) {
             
-            $table->id('id_encuesta');
+            $table->id(); // Crea la columna 'id' autoincrementable
             $table->unsignedBigInteger('id_registro_clase')->nullable();
             $table->date('fecha_creacion');
             $table->enum('estado', ['Pendiente', 'Finalizar']);
             $table->string('enlace_encuesta', 255);
             $table->timestamps();
             
-            $table->foreign('id_registro_clase')->references('id_registro_clase')->on('clases');
+            $table->foreign('id_registro_clase')->references('id')->on('clases');
             
         });
     }

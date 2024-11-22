@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('paralelos', function (Blueprint $table) {
-            $table->id('id_paralelo');
+            $table->id(); // Crea la columna 'id' autoincrementable
             $table->string('nombre_paralelo', 50);
             $table->timestamps();
         });
