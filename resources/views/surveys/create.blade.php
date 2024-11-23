@@ -40,11 +40,11 @@
                     </div>
 
                     <!-- Botón para añadir preguntas -->
-                    <button type="button" id="add-question" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">
+                    <button type="button" id="add-question" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                         Añadir Pregunta
                     </button>
 
-                    <button type="submit" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+                    <button type="submit" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                         Crear Encuesta
                     </button>
                 </form>

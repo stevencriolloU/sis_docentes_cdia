@@ -20,7 +20,7 @@
             </div>
             <div class="mt-4">
                 <a href="{{ route('surveys.create') }}" 
-                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     Crear Encuesta
                 </a>
             </div>

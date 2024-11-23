@@ -10,17 +10,12 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <x-welcome/>
 
-                <h1>Bienvenido, DOCENTE</h1>
+                <h1>Bienvenido, DOCENTE</h1>                
             </div>
-        </div>
+        </div>               
     </div>
 
-    <div class="mt-4">
-        <a href="{{ route('surveys.create') }}" 
-        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            Crear Encuesta
-        </a>
-    </div>
+   
 
 </x-app-layout>
 
