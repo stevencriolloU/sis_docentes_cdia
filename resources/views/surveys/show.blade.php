@@ -12,10 +12,11 @@
                     <h3 class="text-lg font-semibold mb-4">¡Tu encuesta ha sido creada!</h3>
                     <p>Comparte este enlace con tus estudiantes para que respondan la encuesta:</p>
                     <div class="mt-4 bg-gray-100 p-4 rounded-md">
-                        <a href="{{ url('/surveys/' . $survey->uuid) }}" 
+                        <a href="{{ url('/survey/' . $survey->uuid) }}" 
                            class="text-blue-600 underline">
-                            {{ url('/surveys/' . $survey->uuid) }}
+                            {{ url('/survey/' . $survey->uuid) }}
                         </a>
+                        
                     </div>
                 </div>
             </div>

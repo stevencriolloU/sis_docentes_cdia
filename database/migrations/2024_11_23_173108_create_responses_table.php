@@ -12,15 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('responses', function (Blueprint $table) {
-            $table->id(); // ID único de la respuesta
+            $table->id();
             $table->foreignId('survey_id')->constrained()->onDelete('cascade'); // Relación con la encuesta
-            $table->tinyInteger('question_1')->nullable(); // Respuesta de 1 a 5
-            $table->tinyInteger('question_2')->nullable(); // Respuesta de 1 a 5
-            $table->boolean('question_3')->nullable(); // Sí/No
-            $table->boolean('question_4')->nullable(); // Sí/No
-            $table->boolean('question_5')->nullable(); // Sí/No
-            $table->timestamps(); // Timestamps
-        });
+            $table->json('answers'); // Respuestas en formato JSON
+            $table->timestamps();
+        });        
     }
 
     /**

@@ -9,7 +9,7 @@ class Response extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['survey_id', 'question_1', 'question_2', 'question_3', 'question_4', 'question_5'];
+    protected $fillable = ['survey_id', 'answers'];
 
     /**
      * Relación con la encuesta correspondiente.

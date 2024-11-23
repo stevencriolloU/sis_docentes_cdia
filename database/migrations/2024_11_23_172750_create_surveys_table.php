@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('surveys', function (Blueprint $table) {
-            $table->id(); // ID único de la encuesta
-            $table->string('title', 100)->nullable(); // Nombre de la encuesta
-            $table->uuid('uuid')->unique(); // Generar enlaces únicos
+            $table->id();
+            $table->uuid('uuid')->unique(); // UUID para el enlace único
+            $table->string('title')->default('Encuesta Genérica');
+            $table->json('questions'); // Almacena las preguntas en formato JSON
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade'); // Relación con el docente
-            $table->json('results')->nullable(); // Almacenar resultados en formato JSON
-            $table->timestamps(); // Timestamps (created_at, updated_at)
+            $table->timestamps();
         });
+        
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\ResponseController;
 
 
 
@@ -33,12 +34,19 @@ Route::middleware('role:admin')->group(function () {
     Route::post('admin/users/{user}/update-role', [UserRoleController::class, 'update'])->name('admin.users.update-role');
 });
 
-// Rutas solo accesibles por el rol 'docente'
+
+// Rutas para los docentes
 Route::middleware(['auth', 'role:docente'])->group(function () {
-    Route::get('/surveys/create', [SurveyController::class, 'create'])->name('surveys.create');
-    Route::post('/surveys', [SurveyController::class, 'store'])->name('surveys.store');
-    Route::get('/surveys/{uuid}', [SurveyController::class, 'show'])->name('surveys.show');
-    Route::get('/surveys/{uuid}/results', [SurveyController::class, 'results'])->name('surveys.results');
+    Route::get('/docente/surveys/create', [SurveyController::class, 'create'])->name('surveys.create');
+    Route::post('/docente/surveys', [SurveyController::class, 'store'])->name('surveys.store');
+    Route::get('/docente/surveys/{uuid}', [SurveyController::class, 'show'])->name('surveys.show');
+    Route::get('/docente/surveys', [SurveyController::class, 'index'])->name('surveys.index');
+});
+
+Route::middleware(['auth'])->group(function () {
+    // Rutas para responder encuestas
+    Route::get('/survey/{uuid}', [ResponseController::class, 'show'])->name('survey.respond');
+    Route::post('/survey/{uuid}', [ResponseController::class, 'store']);
 });
 
 

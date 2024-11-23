@@ -2,62 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Survey;
-use DragonCode\Contracts\Cashier\Auth\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+
 
 class SurveyController extends Controller
 {
-    /**
-     * Muestra la vista para crear una encuesta.
-     */
     public function create()
     {
         return view('surveys.create');
     }
 
-    /**
-     * Almacena una nueva encuesta en la base de datos.
-     */
     public function store(Request $request)
     {
-        // Crear una nueva encuesta
+        // Crear la encuesta con preguntas genéricas
         $survey = Survey::create([
-            'title' => 'Encuesta sobre clases virtuales', // Título de la encuesta
-            'uuid' => Str::uuid(), // Generar un UUID único
-            'created_by' => 2, // ID del usuario que la crea            
+            'uuid' => Str::uuid(), // Generar enlace único
+            'questions' => json_encode([
+                '¿Cuál es tu nombre?',
+                '¿Qué opinas de esta materia?',
+                '¿Cómo calificarías al docente?',
+                '¿Qué mejorarías en el curso?',
+                '¿Comentarios adicionales?',
+            ]),
+            'created_by' => Auth::id(),
         ]);
-
-        // Redirigir a una página que muestra el enlace único de la encuesta
         return redirect()->route('surveys.show', $survey->uuid)
-            ->with('success', 'Encuesta creada exitosamente.');
+                         ->with('success', 'Encuesta creada exitosamente. Usa el enlace único para compartirla.');
+     }
+
+    public function index()
+    {
+        $surveys = Survey::where('created_by', Auth::id())->get();
+        return view('docente.index', compact('surveys'));
     }
 
-    /**
-     * Muestra el enlace único de una encuesta.
-     */
     public function show($uuid)
     {
-        // Obtener la encuesta por su UUID
         $survey = Survey::where('uuid', $uuid)->firstOrFail();
 
-        // Pasar la encuesta a la vista
         return view('surveys.show', compact('survey'));
-    }
-
-    /**
-     * Muestra los resultados de una encuesta al docente.
-     */
-    public function results($uuid)
-    {
-        // Obtener la encuesta por su UUID
-        $survey = Survey::where('uuid', $uuid)->firstOrFail();
-
-        // Obtener las respuestas asociadas
-        $responses = $survey->responses;
-
-        // Pasar los datos a la vista de resultados
-        return view('surveys.results', compact('survey', 'responses'));
     }
 }

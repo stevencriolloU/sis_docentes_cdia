@@ -13,6 +13,7 @@ class Survey extends Model
         'title',
         'uuid',
         'created_by',
+        'questions',        
     ];
 
     /**
