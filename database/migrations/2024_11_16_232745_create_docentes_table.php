@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('docentes', function (Blueprint $table) {
             
-            $table->id('id_docente');
+            $table->id(); // Crea la columna 'id' autoincrementable
             $table->unsignedBigInteger('id_curso_paralelo')->nullable();
             $table->unsignedBigInteger('id_periodo')->nullable();
             $table->unsignedBigInteger('id_usuario')->nullable();
-            $table->foreign('id_curso_paralelo')->references('id_curso_paralelo')->on('cursoparalelos');
-            $table->foreign('id_periodo')->references('id_periodo')->on('periodos');
+            $table->foreign('id_curso_paralelo')->references('id')->on('cursoparalelos');
+            $table->foreign('id_periodo')->references('id')->on('periodos');
             $table->foreign('id_usuario')->references('id')->on('users');
             $table->timestamps();
         });
