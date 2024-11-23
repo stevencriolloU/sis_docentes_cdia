@@ -5,6 +5,30 @@
         </h2>
     </x-slot>
 
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <x-welcome/>
+
+                <h1>Bienvenido, DOCENTE</h1>
+            </div>
+            <div class="mt-4">
+                <a href="{{ route('surveys.create') }}" 
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Crear Encuesta
+                </a>
+            </div>
+        </div>
+    </div>
+
+    
+
     <div class="py-12">
         <div class="max-w-full mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
