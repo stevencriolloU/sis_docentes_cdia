@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cursos', function (Blueprint $table) {
-            $table->id('id_curso');
+            $table->id(); // Crea la columna 'id' autoincrementable
             $table->string('nombre_curso', 100);
             $table->text('descripcion')->nullable();
             $table->timestamps();

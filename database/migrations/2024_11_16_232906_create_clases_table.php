@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('clases', function (Blueprint $table) {
 
-        $table->id('id_registro_clase');
+        $table->id(); // Crea la columna 'id' autoincrementable
         $table->unsignedBigInteger('id_docente')->nullable();
         $table->time('hora_inicio'); // Hora de inicio de la clase ejemplo 17:00
         $table->time('hora_fin'); // Hora de fin de la clase ejemplo 19:00
         $table->timestamps();
 
-        $table->foreign('id_docente')->references('id_docente')->on('docentes')->onDelete('set null');
+        $table->foreign('id_docente')->references('id')->on('docentes')->onDelete('set null');
 
 
         });
