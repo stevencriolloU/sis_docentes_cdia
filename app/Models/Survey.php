@@ -23,4 +23,9 @@ class Survey extends Model
     {
         return $this->hasMany(Response::class);
     }
+
+    // Convierte las preguntas de JSON a array cuando las obtienes
+    protected $casts = [
+        'questions' => 'array',
+    ];
 }

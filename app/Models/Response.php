@@ -18,5 +18,10 @@ class Response extends Model
     {
         return $this->belongsTo(Survey::class);
     }
+
+    // Convierte las respuestas de JSON a array cuando las obtienes
+    protected $casts = [
+        'answers' => 'array',
+    ];
 }
 

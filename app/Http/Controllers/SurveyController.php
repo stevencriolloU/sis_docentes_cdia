@@ -17,16 +17,28 @@ class SurveyController extends Controller
 
     public function store(Request $request)
     {
-        // Crear la encuesta con preguntas genéricas
+        // Validamos que las preguntas estén presentes
+        $request->validate([
+            'questions' => 'required|array',
+            'questions.*.question' => 'required|string',
+            'questions.*.type' => 'required|string',
+            'questions.*.options' => 'nullable|array',
+        ]);
+
+        // Procesar las preguntas y almacenarlas
+        $questions = collect($request->questions)->map(function ($question) {
+            return [
+                'question' => $question['question'],
+                'type' => $question['type'],
+                'options' => $question['options'] ?? [],
+            ];
+        });
+
+
+        // Crear la encuesta con preguntas personalizadas
         $survey = Survey::create([
-            'uuid' => Str::uuid(), // Generar enlace único
-            'questions' => json_encode([
-                '¿Cuál es tu nombre?',
-                '¿Qué opinas de esta materia?',
-                '¿Cómo calificarías al docente?',
-                '¿Qué mejorarías en el curso?',
-                '¿Comentarios adicionales?',
-            ]),
+            'uuid' => Str::uuid(),
+            'questions' => $questions,
             'created_by' => Auth::id(),
         ]);
         return redirect()->route('surveys.show', $survey->uuid)
