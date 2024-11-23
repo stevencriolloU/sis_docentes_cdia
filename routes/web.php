@@ -5,6 +5,8 @@ use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\EstudianteController;
+use App\Http\Controllers\SurveyController;
+
 
 
 Route::get('/', function () {
@@ -26,16 +28,25 @@ Route::middleware([
 
 // Rutas solo accesibles por el rol 'admin'
 Route::middleware('role:admin')->group(function () {
-    Route::get('/admin_dashboard', [AdminController::class, 'index'])->name('admin.index');
+    //Route::get('/admin_dashboard', [AdminController::class, 'index'])->name('admin.index');
     Route::get('admin/users', [UserRoleController::class, 'index'])->name('admin.users.index');
     Route::post('admin/users/{user}/update-role', [UserRoleController::class, 'update'])->name('admin.users.update-role');
 });
 
-Route::resource('cursos', App\Http\Controllers\CursoController::class);
-Route::resource('paralelos', App\Http\Controllers\ParaleloController::class);
-Route::resource('cursoparalelos', App\Http\Controllers\CursoparaleloController::class);
-Route::resource('periodos', App\Http\Controllers\PeriodoController::class);
+// Rutas solo accesibles por el rol 'docente'
+Route::middleware(['auth', 'role:docente'])->group(function () {
+    Route::get('/surveys/create', [SurveyController::class, 'create'])->name('surveys.create');
+    Route::post('/surveys', [SurveyController::class, 'store'])->name('surveys.store');
+    Route::get('/surveys/{uuid}', [SurveyController::class, 'show'])->name('surveys.show');
+    Route::get('/surveys/{uuid}/results', [SurveyController::class, 'results'])->name('surveys.results');
+});
+
+
+//Route::resource('cursos', App\Http\Controllers\CursoController::class);
+//Route::resource('paralelos', App\Http\Controllers\ParaleloController::class);
+//Route::resource('cursoparalelos', App\Http\Controllers\CursoparaleloController::class);
+//Route::resource('periodos', App\Http\Controllers\PeriodoController::class);
 Route::resource('docentes', App\Http\Controllers\DocenteController::class);
-Route::resource('clases', App\Http\Controllers\ClaseController::class);
-Route::resource('encuestas', App\Http\Controllers\EncuestaController::class);
-Route::resource('preguntas', App\Http\Controllers\PreguntaController::class);
+//Route::resource('clases', App\Http\Controllers\ClaseController::class);
+//Route::resource('encuestas', App\Http\Controllers\EncuestaController::class);
+//Route::resource('preguntas', App\Http\Controllers\PreguntaController::class);
