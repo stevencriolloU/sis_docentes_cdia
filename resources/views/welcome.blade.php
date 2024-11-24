@@ -22,7 +22,7 @@
     </head>
     <body class="flex flex-col min-h-screen text-white antialiased bg-gray-800 shadow-lg">
 
-        <header class="flex items-center bg-gray-500 py-5 px-5">
+        <header class="flex items-center bg-gray-500 py-4 px-5">
             <h1 class="text-2xl font-bold uppercase tracking-wide">
                 Sistema de Seguimiento Docente
             </h1>
@@ -60,11 +60,11 @@
         <main class="max-w-7xl mx-auto mt-8 px-4 sm:px-6 lg:px-8 flex-grow items">
             <section class="rounded-lg shadow-md p-8">                            
             
-                <h1 class="text-2xl font-bold mb-4">
+                <h1 class="text-2xl font-bold mb-2">
                     Bienvenido al Sistema de Seguimiento Docente
                 </h1>                
 
-                <div class="flex items-center py-5">                    
+                <div class="flex items-center">                    
                     <img src="https://lh6.googleusercontent.com/proxy/rumSgkvAQPNMwibBU3y7ILHbugoo_3S-7KcktyZGwLRhQ4p7F29ivBsK7koVLgMYCv9t1VTaSQI_cyUBhzWpQguVqfJ8AVQq2ySe-FDqug" alt="Descripción de la imagen" class=" h-20 w-auto">
                     <p class="text-lg leading-relaxed flex-1 p-6">
                         Este sistema está diseñado para facilitar el seguimiento y la evaluación del desempeño de los docentes.
@@ -125,7 +125,7 @@
         </main>
 
         <!-- Footer -->
-        <footer class="bg-gray-500 mt-12 py-6">
+        <footer class="bg-gray-500 mt-12 py-4">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
                 &copy; {{ date('Y') }} Sistema de Seguimiento Docente. Todos los derechos reservados.
             </div>
