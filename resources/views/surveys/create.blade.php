@@ -38,15 +38,17 @@
                     <div id="additional-questions">
                         <h4 class="text-md font-bold mb-4">Preguntas adicionales</h4>
                     </div>
+                    
 
-                    <!-- Botón para añadir preguntas -->
-                    <button type="button" id="add-question" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        Añadir Pregunta
-                    </button>
+                    <div class="flex justify-center gap-4 mt-6">
+                        <button type="button" id="add-question" class="rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            Añadir Pregunta
+                        </button>
 
-                    <button type="submit" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        Crear Encuesta
-                    </button>
+                        <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            Crear Encuesta
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

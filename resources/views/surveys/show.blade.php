@@ -11,15 +11,31 @@
                 <div class="p-6 text-gray-900">
                     <h3 class="text-lg font-semibold mb-4">¡Tu encuesta ha sido creada!</h3>
                     <p>Comparte este enlace con tus estudiantes para que respondan la encuesta:</p>
-                    <div class="mt-4 bg-gray-100 p-4 rounded-md">
-                        <a href="{{ url('/survey/' . $survey->uuid) }}" 
-                           class="text-blue-600 underline">
+                    <div class="mt-4 bg-gray-100 p-4 rounded-md flex justify-between items-center">
+                        <a href="{{ url('/survey/' . $survey->uuid) }}" id="survey-link" 
+                           class="text-blue-600 underline flex-1 mr-4">
                             {{ url('/survey/' . $survey->uuid) }}
                         </a>
+                        <!-- Botón para copiar la URL -->
+                        <button id="copy-button" 
+                                class="ml-4 text-white bg-indigo-600 px-4 py-2 rounded-md hover:bg-indigo-500 focus:outline-none">
+                            Copiar
+                        </button>
                         
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('copy-button').addEventListener('click', function() {
+            const url = document.getElementById('survey-link').textContent;
+            navigator.clipboard.writeText(url).then(function() {
+                alert('URL copiada al portapapeles');
+            }).catch(function(error) {
+                alert('Error al copiar la URL: ' + error);
+            });
+        });
+    </script>
 </x-app-layout>

@@ -6,6 +6,8 @@
 
         <x-validation-errors class="mb-4" />
 
+        <h1 class="flex items-center justify-center text-white font-semibold mb-6">Registarse</h1>
+
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
@@ -47,7 +49,7 @@
             @endif
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                <a class="underline text-sm text-white hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
 
