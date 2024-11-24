@@ -11,11 +11,11 @@
                 <div class="w-full">
                     <div class="sm:flex sm:items-center">
                         <div class="sm:flex-auto">
-                            <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Show') }} Paralelo</h1>
-                            <p class="mt-2 text-sm text-gray-700">Details of {{ __('Paralelo') }}.</p>
+                            <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Mostrar') }} Paralelo</h1>
+                            <p class="mt-2 text-sm text-gray-700">Detalles de  {{ __('Paralelo') }}s.</p>
                         </div>
                         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                            <a type="button" href="{{ route('paralelos.index') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Back</a>
+                            <a type="button" href="{{ route('paralelos.index') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Regresar</a>
                         </div>
                     </div>
 
