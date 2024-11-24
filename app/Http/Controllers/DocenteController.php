@@ -81,4 +81,8 @@ class DocenteController extends Controller
         return Redirect::route('docentes.index')
             ->with('success', 'Docente deleted successfully');
     }
+
+    public function dashboard(){
+        return view('docente.dashboard');
+    }
 }

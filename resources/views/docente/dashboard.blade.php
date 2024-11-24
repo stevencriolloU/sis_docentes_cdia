@@ -10,9 +10,15 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <x-welcome/>
 
-                <h1>Bienvenido, DOCENTE</h1>                
+                <h1>Bienvenido, DOCENTE</h1>
             </div>
-        </div>               
+            <div class="mt-4">
+                <a href="{{ route('surveys.create') }}" 
+                class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    Crear Encuesta
+                </a>
+            </div>
+        </div>
     </div>
 
    

@@ -20,7 +20,7 @@ Route::middleware([
     'verified', // Aseguramos que el usuario esté verificado
 ])->group(function () {
     Route::middleware('role:admin')->get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::middleware('role:docente')->get('/docente/dashboard', [DocenteController::class, 'index'])->name('docente.dashboard');
+    Route::middleware('role:docente')->get('/docente/dashboard', [DocenteController::class, 'dashboard'])->name('docente.dashboard');
     Route::middleware('role:estudiante')->get('/estudiante/dashboard', [EstudianteController::class, 'index'])->name('estudiante.dashboard');
     
 })->name('dashboard');
