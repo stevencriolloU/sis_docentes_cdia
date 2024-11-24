@@ -1,3 +1,3 @@
 <a href="/">
-    <img src="https://i.imgur.com/8Q5V8Qp.png">
+    <img src="https://lh6.googleusercontent.com/proxy/rumSgkvAQPNMwibBU3y7ILHbugoo_3S-7KcktyZGwLRhQ4p7F29ivBsK7koVLgMYCv9t1VTaSQI_cyUBhzWpQguVqfJ8AVQq2ySe-FDqug" class=" h-20">
 </a>
