@@ -20,7 +20,7 @@
                         <thead>
                             <tr class="bg-gray-100">
                                 <th class="px-4 py-2 border-b text-left">Título</th>
-                                <th class="px-4 py-2 border-b text-left">UUID</th>
+                                <th class="px-4 py-2 border-b text-left">Link</th>
                                 <th class="px-4 py-2 border-b text-center">Acciones</th>
                             </tr>
                         </thead>
@@ -28,7 +28,7 @@
                             @forelse ($surveys as $survey)
                                 <tr>
                                     <td class="px-4 py-2 border-b">{{ $survey->title }}</td>
-                                    <td class="px-4 py-2 border-b">{{ $survey->uuid }}</td>
+                                    <td class="px-4 py-2 border-b">{{ url('/survey/' . $survey->uuid) }}</td>
                                     <td class="px-4 py-2 border-b text-center">
                                         <a href="{{ route('surveys.show', $survey->id) }}" class="rounded-md bg-cyan-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600">Ver</a>
                                         <form action="{{ route('surveys.destroy', $survey->id) }}" method="POST" class="inline">
