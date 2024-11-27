@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Cursos') }}
+            {{ __('Asignaturas') }}
         </h2>
     </x-slot>
 
@@ -11,11 +11,11 @@
                 <div class="w-full">
                     <div class="sm:flex sm:items-center">
                         <div class="sm:flex-auto">
-                            <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Cursos') }}</h1>
-                            <p class="mt-2 text-sm text-gray-700">A list of all the {{ __('Cursos') }}.</p>
+                            <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Asignaturas') }}</h1>
+                            <p class="mt-2 text-sm text-gray-700">A list of all the {{ __('Asignaturas') }}.</p>
                         </div>
                         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                            <a type="button" href="{{ route('cursos.create') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add new</a>
+                            <a type="button" href="{{ route('asignaturas.create') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add new</a>
                         </div>
                     </div>
 
@@ -27,27 +27,31 @@
                                     <tr>
                                         <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">No</th>
                                         
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Semestre</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Paralelo</th>
+									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Id Docente</th>
+									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Id Curso</th>
+									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Nombre Asignatura</th>
+									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Periodo</th>
 
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500"></th>
                                     </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-white">
-                                    @foreach ($cursos as $curso)
+                                    @foreach ($asignaturas as $asignatura)
                                         <tr class="even:bg-gray-50">
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-semibold text-gray-900">{{ ++$i }}</td>
                                             
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $curso->semestre }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $curso->paralelo }}</td>
+										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $asignatura->id_docente }}</td>
+										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $asignatura->id_curso }}</td>
+										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $asignatura->nombre_asignatura }}</td>
+										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $asignatura->periodo }}</td>
 
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
-                                                <form action="{{ route('cursos.destroy', $curso->id) }}" method="POST">
-                                                    <a href="{{ route('cursos.show', $curso->id) }}" class="text-gray-600 font-bold hover:text-gray-900 mr-2">{{ __('Show') }}</a>
-                                                    <a href="{{ route('cursos.edit', $curso->id) }}" class="text-indigo-600 font-bold hover:text-indigo-900  mr-2">{{ __('Edit') }}</a>
+                                                <form action="{{ route('asignaturas.destroy', $asignatura->id) }}" method="POST">
+                                                    <a href="{{ route('asignaturas.show', $asignatura->id) }}" class="text-gray-600 font-bold hover:text-gray-900 mr-2">{{ __('Show') }}</a>
+                                                    <a href="{{ route('asignaturas.edit', $asignatura->id) }}" class="text-indigo-600 font-bold hover:text-indigo-900  mr-2">{{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a href="{{ route('cursos.destroy', $curso->id) }}" class="text-red-600 font-bold hover:text-red-900" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;">{{ __('Delete') }}</a>
+                                                    <a href="{{ route('asignaturas.destroy', $asignatura->id) }}" class="text-red-600 font-bold hover:text-red-900" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;">{{ __('Delete') }}</a>
                                                 </form>
                                             </td>
                                         </tr>
@@ -56,7 +60,7 @@
                                 </table>
 
                                 <div class="mt-4 px-4">
-                                    {!! $cursos->withQueryString()->links() !!}
+                                    {!! $asignaturas->withQueryString()->links() !!}
                                 </div>
                             </div>
                         </div>

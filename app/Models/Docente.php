@@ -41,14 +41,7 @@ class Docente extends Model
     {
         return $this->belongsTo(\App\Models\Cursoparalelo::class, 'id_curso_paralelo', 'id');
     }
-    
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function periodo()
-    {
-        return $this->belongsTo(\App\Models\Periodo::class, 'id_periodo', 'id');
-    }
+        
     
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -56,14 +49,5 @@ class Docente extends Model
     public function user()
     {
         return $this->belongsTo(\App\Models\User::class, 'id_usuario', 'id');
-    }
-    
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function clases()
-    {
-        return $this->hasMany(\App\Models\Clase::class, 'id', 'id_docente');
-    }
-    
+    }        
 }

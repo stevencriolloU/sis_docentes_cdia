@@ -7,6 +7,7 @@ use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\AsignaturaController;
 
 
 
@@ -52,10 +53,8 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::resource('cursos', App\Http\Controllers\CursoController::class);
-Route::resource('paralelos', App\Http\Controllers\ParaleloController::class);
-Route::resource('cursoparalelos', App\Http\Controllers\CursoparaleloController::class);
-Route::resource('periodos', App\Http\Controllers\PeriodoController::class);
+Route::resource('asignaturas', AsignaturaController::class);
+
 Route::resource('docentes', App\Http\Controllers\DocenteController::class);
-Route::resource('clases', App\Http\Controllers\ClaseController::class);
 Route::resource('encuestas', App\Http\Controllers\EncuestaController::class);
 Route::resource('preguntas', App\Http\Controllers\PreguntaController::class);

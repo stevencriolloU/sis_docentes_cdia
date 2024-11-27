@@ -22,8 +22,8 @@ class CursoRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'nombre_curso' => 'required|string',
-			'descripcion' => 'string',
+			'semestre' => 'required',
+			'paralelo' => 'required',
         ];
     }
 }

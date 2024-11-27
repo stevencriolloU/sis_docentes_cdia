@@ -34,7 +34,7 @@
             <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-6">
                 <h3 class="text-xl font-semibold mb-4">Paralelos</h3>
                 <p class="text-gray-600 mb-4">Gestiona los paralelos de los cursos ofrecidos.</p>
-                <a href="{{ route('paralelos.index') }}" 
+                <a href="{{ route('cursos.index') }}" 
                     class="inline-flex items-center px-6 py-2 bg-blue-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                     Paralelos
                 </a>
@@ -44,7 +44,7 @@
             <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-6">
                 <h3 class="text-xl font-semibold mb-4">Cursos-Paralelos</h3>
                 <p class="text-gray-600 mb-4">Asocia cursos con sus respectivos paralelos.</p>
-                <a href="{{ route('cursoparalelos.index') }}" 
+                <a href="{{ route('cursos.index') }}" 
                     class="inline-flex items-center px-6 py-2 bg-blue-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                     Cursos-Paralelos
                 </a>
@@ -54,7 +54,7 @@
             <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-6">
                 <h3 class="text-xl font-semibold mb-4">Periodos</h3>
                 <p class="text-gray-600 mb-4">Consulta y administra los periodos de clases.</p>
-                <a href="{{ route('periodos.index') }}" 
+                <a href="{{ route('cursos.index') }}" 
                     class="inline-flex items-center px-6 py-2 bg-blue-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                     Periodos
                 </a>
@@ -72,9 +72,9 @@
 
             <!-- Tarjeta 7 -->
             <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-6">
-                <h3 class="text-xl font-semibold mb-4">Clases</h3>
-                <p class="text-gray-600 mb-4">Consulta y administra todas las clases disponibles.</p>
-                <a href="{{ route('clases.index') }}" 
+                <h3 class="text-xl font-semibold mb-4">Asignaturas</h3>
+                <p class="text-gray-600 mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
+                <a href="{{ route('asignaturas.index') }}" 
                     class="inline-flex items-center px-6 py-2 bg-blue-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                     Clases
                 </a>

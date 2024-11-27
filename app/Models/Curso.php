@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
  * Class Curso
  *
  * @property $id
- * @property $nombre_curso
- * @property $descripcion
+ * @property $semestre
+ * @property $paralelo
  * @property $created_at
  * @property $updated_at
  *
- * @property Cursoparalelo[] $cursoparalelos
+ * @property Asignatura[] $asignaturas
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -27,15 +27,15 @@ class Curso extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['nombre_curso', 'descripcion'];
+    protected $fillable = ['semestre', 'paralelo'];
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function cursoparalelos()
+    public function asignaturas()
     {
-        return $this->hasMany(\App\Models\Cursoparalelo::class, 'id', 'id_curso');
+        return $this->hasMany(\App\Models\Asignatura::class, 'id', 'id_curso');
     }
     
 }

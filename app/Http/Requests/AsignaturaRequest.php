@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PeriodoRequest extends FormRequest
+class AsignaturaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,10 @@ class PeriodoRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'periodo_inicio' => 'required|string',
-			'periodo_fin' => 'required|string',
+			'id_docente' => 'required',
+			'id_curso' => 'required',
+			'nombre_asignatura' => 'required|string',
+			'periodo' => 'required|string',
         ];
     }
 }

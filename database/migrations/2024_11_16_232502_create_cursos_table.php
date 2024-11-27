@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cursos', function (Blueprint $table) {
-            $table->id(); // Crea la columna 'id' autoincrementable
-            $table->string('nombre_curso', 100);
-            $table->text('descripcion')->nullable();
+            $table->id();
+            $table->enum('semestre', ['1ero', '2do', '3ro', '4to', '5to', '6to', '7mo', '8vo']);
+            $table->enum('paralelo', ['A', 'B']);
             $table->timestamps();
         });
     }
