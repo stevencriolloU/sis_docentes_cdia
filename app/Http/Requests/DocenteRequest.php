@@ -22,6 +22,8 @@ class DocenteRequest extends FormRequest
     public function rules(): array
     {
         return [
+			'id_usuario' => 'required',
+			'contrato' => 'string',
         ];
     }
 }

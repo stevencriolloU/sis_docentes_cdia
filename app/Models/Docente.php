@@ -8,16 +8,13 @@ use Illuminate\Database\Eloquent\Model;
  * Class Docente
  *
  * @property $id
- * @property $id_curso_paralelo
- * @property $id_periodo
  * @property $id_usuario
+ * @property $contrato
  * @property $created_at
  * @property $updated_at
  *
- * @property Cursoparalelo $cursoparalelo
- * @property Periodo $periodo
  * @property User $user
- * @property Clase[] $clases
+ * @property Asignatura[] $asignaturas
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -31,23 +28,23 @@ class Docente extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['id_curso_paralelo', 'id_periodo', 'id_usuario'];
+    protected $fillable = ['id_usuario', 'contrato'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function cursoparalelo()
-    {
-        return $this->belongsTo(\App\Models\Cursoparalelo::class, 'id_curso_paralelo', 'id');
-    }
-        
-    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
         return $this->belongsTo(\App\Models\User::class, 'id_usuario', 'id');
-    }        
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function asignaturas()
+    {
+        return $this->hasMany(\App\Models\Asignatura::class, 'id', 'id_docente');
+    }
+    
 }

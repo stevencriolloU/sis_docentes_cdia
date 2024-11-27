@@ -54,7 +54,6 @@ Route::middleware(['auth'])->group(function () {
 
 Route::resource('cursos', App\Http\Controllers\CursoController::class);
 Route::resource('asignaturas', AsignaturaController::class);
-
 Route::resource('docentes', App\Http\Controllers\DocenteController::class);
 Route::resource('encuestas', App\Http\Controllers\EncuestaController::class);
 Route::resource('preguntas', App\Http\Controllers\PreguntaController::class);
