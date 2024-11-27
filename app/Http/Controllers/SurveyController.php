@@ -43,7 +43,7 @@ class SurveyController extends Controller
             'questions' => $questions,
             'created_by' => Auth::id(),
         ]);
-        return redirect()->route('surveys.show', $survey->uuid)
+        return redirect()->route('surveys.generated', $survey->uuid)
                          ->with('success', 'Encuesta creada exitosamente. Usa el enlace único para compartirla.');
      }
 
