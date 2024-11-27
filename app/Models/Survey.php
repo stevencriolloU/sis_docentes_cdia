@@ -21,10 +21,10 @@ class Survey extends Model
      */
     public function responses()
     {
-        return $this->hasMany(Response::class);
+        return $this->hasMany(Response::class, 'survey_id');
     }
 
-    // Convierte las preguntas de JSON a array cuando las obtienes
+
     protected $casts = [
         'questions' => 'array',
     ];

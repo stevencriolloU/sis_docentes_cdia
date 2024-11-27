@@ -37,10 +37,11 @@ Route::middleware('role:admin')->group(function () {
 
 // Rutas para los docentes
 Route::middleware(['auth', 'role:docente'])->group(function () {
-    Route::get('/docente/surveys/create', [SurveyController::class, 'create'])->name('surveys.create');
-    Route::post('/docente/surveys', [SurveyController::class, 'store'])->name('surveys.store');
-    Route::get('/docente/surveys/{uuid}', [SurveyController::class, 'show'])->name('surveys.show');
-    Route::get('/docente/surveys', [SurveyController::class, 'index'])->name('surveys.index');
+    Route::resource('surveys', SurveyController::class);
+    //Route::get('/docente/surveys/create', [SurveyController::class, 'create'])->name('surveys.create');
+    //Route::post('/docente/surveys', [SurveyController::class, 'store'])->name('surveys.store');
+    Route::get('/docente/surveys/{uuid}', [SurveyController::class, 'generated'])->name('surveys.generated');
+    //Route::get('/docente/surveys', [SurveyController::class, 'index'])->name('surveys.index');
 });
 
 Route::middleware(['auth'])->group(function () {
