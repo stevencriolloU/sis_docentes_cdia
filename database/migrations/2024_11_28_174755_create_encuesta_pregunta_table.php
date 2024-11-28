@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('preguntas', function (Blueprint $table) {            
+        Schema::create('encuesta_pregunta', function (Blueprint $table) {
             $table->id();
-            $table->string('enunciado');
-            $table->enum('tipo_pregunta', ['texto_libre', 'seleccion_simple', 'seleccion_multiple'])->default('seleccion_simple');
-            $table->enum('escala', ['rango', 'likert', 'si_no'])->nullable();; 
+            $table->foreignId('id_encuesta')->constrained('encuestas')->onDelete('cascade'); // Relación con encuestas
+            $table->foreignId('id_pregunta')->constrained('preguntas')->onDelete('cascade'); // Relación con preguntas
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('preguntas');
+        Schema::dropIfExists('encuesta_pregunta');
     }
 };
