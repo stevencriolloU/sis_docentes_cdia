@@ -32,20 +32,14 @@ class PreguntaOpcion extends Model
     protected $fillable = ['pregunta_id', 'opcion_id'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function opcione()
-    {
-        return $this->belongsTo(\App\Models\Opcione::class, 'opcion_id', 'id');
-    }
-    
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function pregunta()
     {
-        return $this->belongsTo(\App\Models\Pregunta::class, 'pregunta_id', 'id');
+        return $this->belongsTo(Pregunta::class);
+    }
+
+    public function opcion()
+    {
+        return $this->belongsTo(Opcione::class);
     }
     
 }

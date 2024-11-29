@@ -16,7 +16,7 @@ class PreguntaOpcionController extends Controller
      */
     public function index(Request $request): View
     {
-        $preguntaOpcions = PreguntaOpcion::paginate();
+        $preguntaOpcions = PreguntaOpcion::with(['pregunta', 'opcion'])->paginate();
 
         return view('pregunta-opcion.index', compact('preguntaOpcions'))
             ->with('i', ($request->input('page', 1) - 1) * $preguntaOpcions->perPage());
