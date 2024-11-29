@@ -11,7 +11,7 @@ use App\Http\Controllers\AsignaturaController;
 use App\Http\Controllers\EncuestaController;
 use App\Http\Controllers\PreguntaController;
 use App\Http\Controllers\OpcioneController;
-
+use App\Http\Controllers\PreguntaOpcionController;
 
 
 Route::get('/', function () {
@@ -61,3 +61,4 @@ Route::resource('docentes', App\Http\Controllers\DocenteController::class);
 Route::resource('encuestas', EncuestaController::class);
 Route::resource('preguntas', PreguntaController::class);
 Route::resource('opciones', OpcioneController::class);
+Route::resource('pregunta-opcions', PreguntaOpcionController::class);
