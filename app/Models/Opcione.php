@@ -30,12 +30,9 @@ class Opcione extends Model
     protected $fillable = ['opcion', 'valor'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function preguntaOpcions()
+    public function preguntas()
     {
-        return $this->hasMany(\App\Models\PreguntaOpcion::class, 'id', 'opcion_id');
+        return $this->belongsToMany(Pregunta::class, 'pregunta_opcion', 'opcion_id', 'pregunta_id')
+                    ->withTimestamps();
     }
-    
 }

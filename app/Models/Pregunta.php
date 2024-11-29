@@ -33,28 +33,10 @@ class Pregunta extends Model
     protected $fillable = ['enunciado', 'tipo_pregunta', 'escala'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function encuestaPreguntas()
+    public function opciones()
     {
-        return $this->hasMany(\App\Models\EncuestaPreguntum::class, 'id', 'id_pregunta');
-    }
-    
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function preguntaOpcions()
-    {
-        return $this->hasMany(\App\Models\PreguntaOpcion::class, 'id', 'pregunta_id');
-    }
-    
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function respuestas()
-    {
-        return $this->hasMany(\App\Models\Respuesta::class, 'id', 'id_pregunta');
+        return $this->belongsToMany(Opcione::class, 'pregunta_opcion', 'pregunta_id', 'opcion_id')
+                    ->withTimestamps();
     }
     
 }
