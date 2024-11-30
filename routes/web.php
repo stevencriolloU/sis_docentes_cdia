@@ -61,6 +61,8 @@ Route::resource('cursos', App\Http\Controllers\CursoController::class);
 Route::resource('asignaturas', AsignaturaController::class);
 Route::resource('docentes', App\Http\Controllers\DocenteController::class);
 Route::resource('encuestas', EncuestaController::class);
+Route::get('/docente/encuestas/{id}', [EncuestaController::class, 'generated'])->name('encuestas.generated');
+
 Route::resource('preguntas', PreguntaController::class);
 Route::resource('opciones', OpcioneController::class);
 Route::resource('pregunta-opcions', PreguntaOpcionController::class);

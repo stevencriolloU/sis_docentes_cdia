@@ -15,7 +15,7 @@ class DocentesYAsignaturasSeeder extends Seeder
      */
     public function run(): void
     {
-        // Obtén todos los cursos disponibles
+        //cursos disponibles
         $cursos = Curso::all();
 
         if ($cursos->isEmpty()) {
@@ -47,10 +47,10 @@ class DocentesYAsignaturasSeeder extends Seeder
             $user = User::create([
                 'name' => $docenteData['name'],
                 'email' => $docenteData['email'],
-                'password' => bcrypt('password'), // Contraseña por defecto
+                'password' => bcrypt('12345678'), // Contraseña por defecto
             ]);
 
-            // 2. Asignar el rol de docente (si usas roles)
+            // 2. Asignar el rol de docente 
             $user->assignRole('docente');
 
             // 3. Crear docente
@@ -61,7 +61,7 @@ class DocentesYAsignaturasSeeder extends Seeder
 
             // 4. Crear asignaturas para el docente
             foreach ($docenteData['asignaturas'] as $asignaturaNombre) {
-                // Asigna un curso aleatorio de los cursos disponibles
+                // Asigna un curso aleatorio
                 $curso = $cursos->random();
 
                 Asignatura::create([

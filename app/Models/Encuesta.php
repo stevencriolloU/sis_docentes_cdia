@@ -34,7 +34,7 @@ class Encuesta extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['id_asignatura', 'nombre_encuesta', 'fecha_creacion', 'creado_por', 'enlace_encuesta'];
+    protected $fillable = ['id_asignatura', 'nombre_encuesta', 'fecha_creacion', 'creado_por','uuid', 'enlace_encuesta'];
 
 
     /**
@@ -60,7 +60,7 @@ class Encuesta extends Model
      */
     public function preguntas()
     {
-        return $this->belongsToMany(Pregunta::class, 'encuesta_pregunta', 'encuesta_id', 'pregunta_id');
+        return $this->belongsToMany(Pregunta::class, 'encuesta_pregunta', 'id_encuesta', 'id_pregunta');
     }
 
     
