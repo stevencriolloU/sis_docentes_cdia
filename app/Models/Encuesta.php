@@ -54,12 +54,15 @@ class Encuesta extends Model
     }
     
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Relación muchos a muchos con el modelo Pregunta.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function encuestaPreguntas()
+    public function preguntas()
     {
-        return $this->hasMany(\App\Models\EncuestaPreguntum::class, 'id', 'id_encuesta');
+        return $this->belongsToMany(Pregunta::class, 'encuesta_pregunta', 'encuesta_id', 'pregunta_id');
     }
+
     
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

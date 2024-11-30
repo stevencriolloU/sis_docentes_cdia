@@ -38,5 +38,15 @@ class Pregunta extends Model
         return $this->belongsToMany(Opcione::class, 'pregunta_opcion', 'pregunta_id', 'opcion_id')
                     ->withTimestamps();
     }
+
+    /**
+     * Relación muchos a muchos con el modelo Encuesta.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function encuestas()
+    {
+        return $this->belongsToMany(Encuesta::class, 'encuesta_pregunta', 'pregunta_id', 'encuesta_id');
+    }
     
 }

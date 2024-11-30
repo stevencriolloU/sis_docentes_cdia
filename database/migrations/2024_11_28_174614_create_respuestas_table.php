@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('id_pregunta')->constrained('preguntas')->onDelete('cascade');
             $table->text('respuesta');
             $table->foreignId('id_usuario')->nullable()->constrained('users')->onDelete('set null');
-            $table->timestamp('fecha_respuesta')->useCurrent(); // Esto automáticamente usa el timestamp actual
+            $table->timestamp('fecha_respuesta')->useCurrent();
             $table->timestamps();
         });
     }

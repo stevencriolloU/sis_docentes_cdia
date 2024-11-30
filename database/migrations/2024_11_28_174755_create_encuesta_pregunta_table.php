@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('encuesta_pregunta', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_encuesta')->constrained('encuestas')->onDelete('cascade'); // Relación con encuestas
-            $table->foreignId('id_pregunta')->constrained('preguntas')->onDelete('cascade'); // Relación con preguntas
+            $table->foreignId('encuesta_id')->constrained('encuestas')->onDelete('cascade'); // Relación con encuestas
+            $table->foreignId('pregunta_id')->constrained('preguntas')->onDelete('cascade'); // Relación con preguntas
             $table->timestamps();
+
+            // Índice único compuesto para evitar duplicados
+            $table->unique(['encuesta_id', 'pregunta_id']);
         });
     }
 
