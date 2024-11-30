@@ -13,6 +13,7 @@ use App\Http\Controllers\PreguntaController;
 use App\Http\Controllers\OpcioneController;
 use App\Http\Controllers\PreguntaOpcionController;
 use App\Http\Controllers\EncuestaPreguntumController;
+use App\Http\Controllers\RespuestaController;
 
 
 Route::get('/', function () {
@@ -64,3 +65,4 @@ Route::resource('preguntas', PreguntaController::class);
 Route::resource('opciones', OpcioneController::class);
 Route::resource('pregunta-opcions', PreguntaOpcionController::class);
 Route::resource('encuesta-pregunta', EncuestaPreguntumController::class);
+Route::resource('respuestas', RespuestaController::class);

@@ -35,4 +35,10 @@ class Opcione extends Model
         return $this->belongsToMany(Pregunta::class, 'pregunta_opcion', 'opcion_id', 'pregunta_id')
                     ->withTimestamps();
     }
+
+    // Relación con Respuesta (Una opción puede ser la respuesta de muchas respuestas)
+    public function respuestas()
+    {
+        return $this->hasMany(Respuesta::class, 'opcion_id');
+    }
 }

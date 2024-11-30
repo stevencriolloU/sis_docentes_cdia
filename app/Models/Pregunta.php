@@ -48,5 +48,12 @@ class Pregunta extends Model
     {
         return $this->belongsToMany(Encuesta::class, 'encuesta_pregunta', 'pregunta_id', 'encuesta_id');
     }
+
+    // Relación con Respuesta (Una pregunta puede tener muchas respuestas)
+    public function respuestas()
+    {
+        return $this->hasMany(Respuesta::class, 'id_pregunta');
+    }
     
+
 }
