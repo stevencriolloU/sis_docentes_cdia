@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('respuestas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_encuesta')->constrained('encuestas')->onDelete('cascade');
-            $table->foreignId('id_pregunta')->constrained('preguntas')->onDelete('cascade');
-            $table->text('respuesta');
+            $table->foreignId('id_pregunta')->constrained('preguntas')->onDelete('cascade');  // Relaciona con la tabla 'preguntas'
+            $table->foreignId('opcion_id')->constrained('opciones')->onDelete('cascade');  // Relaciona con la tabla 'opciones'
             $table->foreignId('id_usuario')->nullable()->constrained('users')->onDelete('set null');
-            $table->timestamp('fecha_respuesta')->useCurrent(); // Esto automáticamente usa el timestamp actual
+            $table->timestamp('fecha_respuesta')->useCurrent();
             $table->timestamps();
         });
     }
