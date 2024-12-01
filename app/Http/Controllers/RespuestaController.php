@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RespuestaRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Encuesta;
+use Illuminate\Support\Facades\Auth;
 
 class RespuestaController extends Controller
 {
@@ -22,9 +24,9 @@ class RespuestaController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * $respuestas->perPage());
     }
 
-    /**
+    /*
      * Show the form for creating a new resource.
-     */
+     
     public function create(): View
     {
         $respuesta = new Respuesta();
@@ -32,20 +34,38 @@ class RespuestaController extends Controller
         return view('respuesta.create', compact('respuesta'));
     }
 
+    */
+
     /**
      * Store a newly created resource in storage.
      */
-    public function store(RespuestaRequest $request): RedirectResponse
+    public function store(Request $request, $uuid): View
     {
-        Respuesta::create($request->validated());
+        // Buscar la encuesta por UUID
+        $encuesta = Encuesta::where('uuid', $uuid)->firstOrFail();
 
-        return Redirect::route('respuestas.index')
-            ->with('success', 'Respuesta created successfully.');
+        // Validar las respuestas
+        $validated = $request->validate([
+            'preguntas' => 'required|array',
+            'preguntas.*' => 'required|exists:opciones,id',
+        ]);
+
+        // Recorrer y guardar cada respuesta
+        foreach ($validated['preguntas'] as $id_pregunta => $opcion_id) {
+            Respuesta::create([
+                'id_encuesta' => $encuesta->id,
+                'id_pregunta' => $id_pregunta,
+                'opcion_id' => $opcion_id,
+                'id_usuario' => Auth::id(), // ID del usuario autenticado, si existe
+            ]);
+        }
+
+        return view('respuesta.thankyou');
     }
 
-    /**
+    /*
      * Display the specified resource.
-     */
+     
     public function show($id): View
     {
         $respuesta = Respuesta::find($id);
@@ -55,7 +75,7 @@ class RespuestaController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     */
+     
     public function edit($id): View
     {
         $respuesta = Respuesta::find($id);
@@ -65,7 +85,7 @@ class RespuestaController extends Controller
 
     /**
      * Update the specified resource in storage.
-     */
+     
     public function update(RespuestaRequest $request, Respuesta $respuesta): RedirectResponse
     {
         $respuesta->update($request->validated());
@@ -81,4 +101,5 @@ class RespuestaController extends Controller
         return Redirect::route('respuestas.index')
             ->with('success', 'Respuesta deleted successfully');
     }
+    */
 }

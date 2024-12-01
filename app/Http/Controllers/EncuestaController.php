@@ -118,4 +118,12 @@ class EncuestaController extends Controller
 
         return view('encuesta.generated', compact('encuesta'));
     }
+
+    // Muestra la encuesta como formulario para que se respondan
+    public function responder($uuid)
+    {
+        $encuesta = Encuesta::where('uuid', $uuid)->with('preguntas.opciones')->firstOrFail();
+
+        return view('encuesta.answer', compact('encuesta'));
+    }
 }

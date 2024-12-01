@@ -67,4 +67,12 @@ Route::resource('preguntas', PreguntaController::class);
 Route::resource('opciones', OpcioneController::class);
 Route::resource('pregunta-opcions', PreguntaOpcionController::class);
 Route::resource('encuesta-pregunta', EncuestaPreguntumController::class);
+
+//RESPUESTAS
 Route::resource('respuestas', RespuestaController::class);
+
+// Muestra el formulario para responder la encuesta
+Route::get('/encuestas/{uuid}/responder', [EncuestaController::class, 'responder'])->name('encuestas.responder');
+
+// Almacena las respuestas
+Route::post('/encuestas/{uuid}/respuestas', [RespuestaController::class, 'store'])->name('respuestas.store');
