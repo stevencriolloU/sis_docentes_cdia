@@ -21,7 +21,7 @@
 
                     <div class="flow-root">
                         <div class="mt-8 overflow-x-auto">
-                            <div class="max-w-xl py-2 align-middle">
+                            <div class="max-w-full py-2 align-middle">
                                 <form method="POST" action="{{ route('encuestas.store') }}"  role="form" enctype="multipart/form-data">
                                     @csrf
 

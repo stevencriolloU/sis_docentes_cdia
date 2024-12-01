@@ -5,80 +5,57 @@ namespace App\Http\Controllers;
 use App\Models\Respuesta;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\RespuestaRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Encuesta;
+use Illuminate\Support\Facades\Auth;
 
 class RespuestaController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
+{    
     public function index(Request $request): View
     {
         $respuestas = Respuesta::paginate();
 
         return view('respuesta.index', compact('respuestas'))
             ->with('i', ($request->input('page', 1) - 1) * $respuestas->perPage());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(): View
-    {
-        $respuesta = new Respuesta();
-
-        return view('respuesta.create', compact('respuesta'));
-    }
+    }    
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(RespuestaRequest $request): RedirectResponse
+    public function store(Request $request, $uuid): View
     {
-        Respuesta::create($request->validated());
+        // Buscar la encuesta por UUID
+        $encuesta = Encuesta::where('uuid', $uuid)->firstOrFail();
 
-        return Redirect::route('respuestas.index')
-            ->with('success', 'Respuesta created successfully.');
+        // Validar las respuestas
+        $validated = $request->validate([
+            'preguntas' => 'required|array',
+            'preguntas.*' => 'required|exists:opciones,id',
+        ]);
+
+        // Recorrer y guardar cada respuesta
+        foreach ($validated['preguntas'] as $id_pregunta => $opcion_id) {
+            Respuesta::create([
+                'id_encuesta' => $encuesta->id,
+                'id_pregunta' => $id_pregunta,
+                'opcion_id' => $opcion_id,
+                'id_usuario' => Auth::id(),
+            ]);
+        }
+
+        return view('respuesta.thankyou');
     }
 
-    /**
+    /** 
      * Display the specified resource.
      */
-    public function show($id): View
+    public function show($id)
     {
-        $respuesta = Respuesta::find($id);
+        // Obtener la encuesta con sus preguntas y respuestas
+        $encuesta = Encuesta::with(['preguntas.respuestas.opcion', 'preguntas.respuestas.user'])
+            ->findOrFail($id);
 
-        return view('respuesta.show', compact('respuesta'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id): View
-    {
-        $respuesta = Respuesta::find($id);
-
-        return view('respuesta.edit', compact('respuesta'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(RespuestaRequest $request, Respuesta $respuesta): RedirectResponse
-    {
-        $respuesta->update($request->validated());
-
-        return Redirect::route('respuestas.index')
-            ->with('success', 'Respuesta updated successfully');
-    }
-
-    public function destroy($id): RedirectResponse
-    {
-        Respuesta::find($id)->delete();
-
-        return Redirect::route('respuestas.index')
-            ->with('success', 'Respuesta deleted successfully');
-    }
+        return view('respuesta.show', compact('encuesta'));
+    }        
 }

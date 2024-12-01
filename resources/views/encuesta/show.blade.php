@@ -15,7 +15,7 @@
                             <p class="mt-2 text-sm text-gray-700">Details of {{ __('Encuesta') }}.</p>
                         </div>
                         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                            <a type="button" href="{{ route('encuestas.index') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Back</a>
+                            <a type="button" href="{{ route('encuestas.index') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Volver</a>
                         </div>
                     </div>
 
@@ -48,6 +48,10 @@
 
                                     </dl>
                                 </div>
+                                <a type="button" href="{{ route('respuestas.show', $encuesta->id) }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                    Ver Respuestas
+                                </a>
+
                             </div>
                         </div>
                     </div>

@@ -24,9 +24,11 @@ class EncuestaRequest extends FormRequest
         return [
 			'id_asignatura' => 'required',
 			'nombre_encuesta' => 'required|string',
-			'fecha_creacion' => 'required',
+			//'fecha_creacion' => 'required',
 			'creado_por' => 'required',
-			'enlace_encuesta' => 'required|string',
+			//'enlace_encuesta' => 'required|string',
+
+            
         ];
     }
 }

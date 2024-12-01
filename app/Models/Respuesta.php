@@ -63,7 +63,7 @@ class Respuesta extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function opcione()
+    public function opcion()
     {
         return $this->belongsTo(\App\Models\Opcione::class, 'opcion_id', 'id');
     }           

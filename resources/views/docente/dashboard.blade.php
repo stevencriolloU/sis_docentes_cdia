@@ -18,7 +18,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-gray-800">Crear Encuesta</h3>
                         <p class="mt-2 text-gray-600">Diseña y crea nuevas encuestas para tus estudiantes de manera fácil y rápida.</p>
-                        <a href="{{ route('surveys.create') }}" 
+                        <a href="{{ route('encuestas.create') }}" 
                             class="mt-4 inline-block px-6 py-2 bg-indigo-600 text-white text-center rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 transition duration-200">
                             Crear Nueva Encuesta
                         </a>
@@ -30,7 +30,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-gray-800">Ver Mis Encuestas</h3>
                         <p class="mt-2 text-gray-600">Accede a las encuestas que ya has creado.</p>
-                        <a href="{{ route('surveys.index') }}" 
+                        <a href="{{ route('encuestas.index') }}" 
                             class="mt-4 inline-block px-6 py-2 bg-green-600 text-white text-center rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 transition duration-200">
                             Ver Encuestas
                         </a>
@@ -42,7 +42,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-gray-800">Ver Resultados</h3>
                         <p class="mt-2 text-gray-600">Accede a los resultados de las encuestas que ya has creado.</p>
-                        <a href="{{ route('surveys.index') }}" 
+                        <a href="{{ route('#') }}" 
                             class="mt-4 inline-block px-6 py-2 bg-cyan-600 text-white text-center rounded-md hover:bg-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:ring-offset-2 transition duration-200">
                             Ver Resultados
                         </a>

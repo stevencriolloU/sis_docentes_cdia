@@ -12,9 +12,9 @@
                     <h3 class="text-lg font-semibold mb-4">¡Tu encuesta ha sido creada!</h3>
                     <p>Comparte este enlace con tus estudiantes para que respondan la encuesta:</p>
                     <div class="mt-4 bg-gray-100 p-4 rounded-md flex justify-between items-center">
-                        <a href="{{ url('/survey/' . $survey->uuid) }}" id="survey-link" 
+                        <a href="{{ $encuesta->enlace_encuesta }}" id="survey-link" 
                            class="text-blue-600 underline flex-1 mr-4">
-                            {{ url('/survey/' . $survey->uuid) }}
+                            {{ $encuesta->enlace_encuesta }}
                         </a>
                         <!-- Botón para copiar la URL -->
                         <button id="copy-button" 
