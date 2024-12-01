@@ -61,19 +61,45 @@ class SurveyController extends Controller
     }
 
     public function show($id)
-    {
-        $survey = Survey::with('responses')->findOrFail($id);
-        
-        // Asegúrate de que las preguntas sean un array
-        $questions = $survey->questions;
+{
+    $survey = Survey::with('responses')->findOrFail($id);
+    
+    // Obtén las preguntas de la encuesta
+    $questions = $survey->questions;
 
-        // Procesa las respuestas y decodifica el JSON
-        $responses = $survey->responses->map(function ($response) {
-            return json_decode($response->answers, true); // Decodifica como array
-        });
+    // Procesa las respuestas y cuenta cuántas veces aparece cada opción
+    $chartData = [];
+    $chartColors = [
+        'rgba(255, 99, 132, 0.5)',
+        'rgba(54, 162, 235, 0.5)',
+        'rgba(255, 206, 86, 0.5)',
+        'rgba(75, 192, 192, 0.5)',
+        'rgba(153, 102, 255, 0.5)',
+        'rgba(255, 159, 64, 0.5)'
+    ];
 
-        return view('surveys.show', compact('survey', 'questions', 'responses'));
+    foreach ($questions as $index => $question) {
+        $answersCount = []; // Inicializa el contador para cada respuesta
+
+        foreach ($survey->responses as $response) {
+            $answers = json_decode($response->answers, true);
+            $answer = $answers[$index] ?? 'No respondida';
+
+            if (!isset($answersCount[$answer])) {
+                $answersCount[$answer] = 0;
+            }
+            $answersCount[$answer]++;
+        }
+
+        $chartData[] = [
+            'question' => $question['question'],
+            'answers' => $answersCount,
+        ];
     }
+
+    return view('surveys.show', compact('survey', 'chartData', 'chartColors', 'questions'));
+}
+
 
 
 

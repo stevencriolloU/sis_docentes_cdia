@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Respuestas de la Encuesta
@@ -11,16 +10,30 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <h3 class="text-lg font-bold mb-4">Resultados de la Encuesta: {{ $survey->title }}</h3>
 
-                @foreach ($questions as $index => $question)
+                @foreach ($chartData as $index => $data)
                     <div class="mb-8">
-                        <label class="block text-gray-700 font-semibold mb-2">{{ $index + 1 }}. {{ $question['question'] }}</label>
+                        <h4 class="text-lg font-semibold mb-4">{{ $index + 1 }}. {{ $data['question'] }}</h4>
 
-                        <div class="space-y-2">
-                            @foreach ($responses as $response)
-                                <div class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded-md shadow-sm">
-                                    <span class="text-gray-600">{{ $response[$index] ?? 'No respondida' }}</span>
+                        <!-- Centrado de los elementos -->
+                        <div class="flex justify-center gap-6 items-center">
+                            <!-- Canvas más pequeño -->
+                            <div class="flex-1 flex justify-center">
+                                <canvas id="chart-{{ $index }}" width="300" height="300"></canvas>
+                            </div>
+
+                            <!-- Cuadro con los votos -->
+                            <div class="flex-1 pl-6 max-w-xs">
+                                <div class="space-y-2">
+                                    @foreach ($data['answers'] as $answer => $count)
+                                        <div class="flex items-center">
+                                            <!-- Color correspondiente al segmento -->
+                                            <div class="w-4 h-4 mr-2" style="background-color: {{ $chartColors[$loop->index] }};"></div>
+                                            <!-- Texto con el conteo de votos -->
+                                            <span class="text-gray-700">{{ $answer }} = {{ $count }} votos</span>
+                                        </div>
+                                    @endforeach
                                 </div>
-                            @endforeach
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -32,4 +45,29 @@
         </div>
     </div>
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @foreach ($chartData as $index => $data)
+                const ctx{{ $index }} = document.getElementById('chart-{{ $index }}').getContext('2d');
+                const chart{{ $index }} = new Chart(ctx{{ $index }}, {
+                    type: 'pie', // Tipo de gráfico: pastel
+                    data: {
+                        labels: {!! json_encode(array_keys($data['answers'])) !!},
+                        datasets: [{
+                            data: {!! json_encode(array_values($data['answers'])) !!},
+                            backgroundColor: {!! json_encode($chartColors) !!},
+                            borderColor: {!! json_encode($chartColors) !!},
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: false, // Desactiva responsividad para tamaño fijo
+                        maintainAspectRatio: false, // Permite control total del tamaño
+                    }
+                });
+            @endforeach
+        });
+    </script>
 </x-app-layout>
