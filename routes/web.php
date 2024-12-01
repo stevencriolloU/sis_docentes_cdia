@@ -76,3 +76,8 @@ Route::get('/encuestas/{uuid}/responder', [EncuestaController::class, 'responder
 
 // Almacena las respuestas
 Route::post('/encuestas/{uuid}/respuestas', [RespuestaController::class, 'store'])->name('respuestas.store');
+
+Route::middleware(['auth', 'role:docente'])->group(function () {
+    //muestra las respuestas
+    Route::get('/encuestas/{id}/respuestas', [RespuestaController::class, 'show'])->name('respuestas.show');
+});
