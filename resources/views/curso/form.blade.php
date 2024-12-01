@@ -27,6 +27,6 @@
 
     <!-- Botón de Envío -->
     <div class="flex items-center gap-4">
-        <x-button>Submit</x-button>
+        <x-button>Enviar</x-button>
     </div>
 </div>

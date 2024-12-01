@@ -82,9 +82,16 @@ class DocenteController extends Controller
             ->with('success', 'Docente deleted successfully');
     }
 
+    
+
+
+
+
+
     public function dashboard()
     {        
         return view('docente.dashboard');
     }
+
 
 }
