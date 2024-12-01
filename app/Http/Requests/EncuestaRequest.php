@@ -22,9 +22,13 @@ class EncuestaRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'fecha_creacion' => 'required',
-			'estado' => 'required',
-			'enlace_encuesta' => 'required|string',
+			'id_asignatura' => 'required',
+			'nombre_encuesta' => 'required|string',
+			//'fecha_creacion' => 'required',
+			'creado_por' => 'required',
+			//'enlace_encuesta' => 'required|string',
+
+            
         ];
     }
 }

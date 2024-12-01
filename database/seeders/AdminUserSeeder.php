@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+use App\Models\Docente;
+
 
 class AdminUserSeeder extends Seeder
 {
@@ -34,6 +36,8 @@ class AdminUserSeeder extends Seeder
 
         // Asignar el rol de docente al usuario
         $docente->assignRole('docente');
+        
+        //Docente::create(['id_usuario' => $docente->id]);
 
         // Crear el usuario estudiante (si no existe)
         $estudiante = User::firstOrCreate([

@@ -8,7 +8,7 @@
 
     <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"> <!-- Usamos un grid para hacer que las tarjetas se acomoden en columnas -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             
             <!-- Tarjeta 1 -->
             <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-6">
@@ -46,27 +46,67 @@
                 <p class="text-gray-600 mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
                 <a href="{{ route('asignaturas.index') }}" 
                     class="inline-flex items-center px-6 py-2 bg-blue-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
-                    Clases
+                    Asignaturas
                 </a>
             </div>
 
             <!-- Tarjeta 5 -->
             <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-6">
                 <h3 class="text-xl font-semibold mb-4">Encuestas</h3>
-                <p class="text-gray-600 mb-4">Crea y gestiona encuestas para los estudiantes.</p>
+                <p class="text-gray-600 mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
                 <a href="{{ route('encuestas.index') }}" 
                     class="inline-flex items-center px-6 py-2 bg-blue-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                     Encuestas
                 </a>
-            </div>
+            </div>            
 
             <!-- Tarjeta 6 -->
             <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-6">
                 <h3 class="text-xl font-semibold mb-4">Preguntas</h3>
-                <p class="text-gray-600 mb-4">Gestiona las preguntas utilizadas en las encuestas.</p>
+                <p class="text-gray-600 mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
                 <a href="{{ route('preguntas.index') }}" 
                     class="inline-flex items-center px-6 py-2 bg-blue-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                     Preguntas
+                </a>
+            </div>
+
+            <!-- Tarjeta 7 -->
+            <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-6">
+                <h3 class="text-xl font-semibold mb-4">Encuesta Pregunta</h3>
+                <p class="text-gray-600 mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
+                <a href="{{ route('encuesta-pregunta.index') }}" 
+                    class="inline-flex items-center px-6 py-2 bg-blue-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
+                    Encuesta Pregunta
+                </a>
+            </div>
+
+            <!-- Tarjeta 8 -->
+            <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-6">
+                <h3 class="text-xl font-semibold mb-4">Opciones</h3>
+                <p class="text-gray-600 mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
+                <a href="{{ route('opciones.index') }}" 
+                    class="inline-flex items-center px-6 py-2 bg-blue-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
+                    Opciones
+                </a>
+            </div>
+
+             <!-- Tarjeta 9 -->
+             <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-6">
+                <h3 class="text-xl font-semibold mb-4">Pregunta Opcion</h3>
+                <p class="text-gray-600 mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
+                <a href="{{ route('pregunta-opcions.index') }}" 
+                    class="inline-flex items-center px-6 py-2 bg-blue-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
+                    Pregunta Opcion
+                </a>
+            </div>
+            
+            <!-- Tarjeta 10 -->
+            <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-6">
+                <h3 class="text-xl font-semibold mb-4">Respuestas</h3>
+                <p class="text-gray-600 mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
+                <a href="{{ route('respuestas.index') }}" 
+                    class="inline-flex items-center px-6 py-2 bg-blue-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
+                    Respuestas
                 </a>
             </div>
 

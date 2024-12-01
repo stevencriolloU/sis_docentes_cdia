@@ -67,4 +67,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function docente()
+    {
+        return $this->hasOne(Docente::class, 'id_usuario'); // O la clave adecuada en tu base de datos
+    }
 }

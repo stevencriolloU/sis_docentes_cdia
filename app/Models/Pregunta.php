@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
  * Class Pregunta
  *
  * @property $id
- * @property $id_encuesta
- * @property $texto_pregunta
- * @property $Type
+ * @property $enunciado
+ * @property $tipo_pregunta
+ * @property $escala
  * @property $created_at
  * @property $updated_at
  *
- * @property Encuesta $encuesta
+ * @property EncuestaPreguntum[] $encuestaPreguntas
+ * @property PreguntaOpcion[] $preguntaOpcions
  * @property Respuesta[] $respuestas
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
@@ -29,23 +30,30 @@ class Pregunta extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['id_encuesta', 'texto_pregunta', 'Type'];
+    protected $fillable = ['enunciado', 'tipo_pregunta', 'escala'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function encuesta()
+    public function opciones()
     {
-        return $this->belongsTo(\App\Models\Encuesta::class, 'id_encuesta', 'id');
+        return $this->belongsToMany(Opcione::class, 'pregunta_opcion', 'pregunta_id', 'opcion_id')
+                    ->withTimestamps();
     }
-    
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Relación muchos a muchos con el modelo Encuesta.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
+    public function encuestas()
+    {
+        return $this->belongsToMany(Encuesta::class, 'encuesta_pregunta', 'pregunta_id', 'encuesta_id');
+    }
+
+    // Relación con Respuesta (Una pregunta puede tener muchas respuestas)
     public function respuestas()
     {
-        return $this->hasMany(\App\Models\Respuesta::class, 'id', 'id_pregunta');
+        return $this->hasMany(Respuesta::class, 'id_pregunta');
     }
     
+
 }

@@ -1,53 +1,63 @@
 <div class="space-y-6">
+    <!-- Campo para seleccionar la asignatura -->
     <div>
-        <label for="id_registro_clase" class="block text-sm font-medium text-gray-700">Id Registro Clase</label>
-        <input id="id_registro_clase" name="id_registro_clase" type="text" 
-            value="{{ old('id_registro_clase', $encuesta?->id_registro_clase) }}" 
-            autocomplete="id_registro_clase" placeholder="Id Registro Clase" 
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
-        @error('id_registro_clase')
-            <span class="text-sm text-red-600">{{ $message }}</span>
-        @enderror
-    </div>
-
-    <div>
-        <label for="fecha_creacion" class="block text-sm font-medium text-gray-700">Fecha Creación</label>
-        <input id="fecha_creacion" name="fecha_creacion" type="date" 
-            value="{{ old('fecha_creacion', $encuesta?->fecha_creacion) }}" 
-            autocomplete="fecha_creacion" placeholder="Fecha Creación" 
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
-        @error('fecha_creacion')
-            <span class="text-sm text-red-600">{{ $message }}</span>
-        @enderror
-    </div>
-
-    <div>
-        <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
-        <select id="estado" name="estado" 
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            <option value="Pendiente" {{ old('estado', $encuesta?->estado) == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
-            <option value="Finalizar" {{ old('estado', $encuesta?->estado) == 'Finalizar' ? 'selected' : '' }}>Finalizar</option>
+        <x-label for="id_asignatura" :value="__('Asignatura')" />
+        <select id="id_asignatura" name="id_asignatura" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            <option value="">Selecciona una asignatura</option>
+            @foreach ($asignaturas as $asignatura)
+                <option value="{{ $asignatura->id }}"
+                        {{ old('id_asignatura', $encuesta?->id_asignatura) == $asignatura->id ? 'selected' : '' }}>
+                    {{ $asignatura->nombre_asignatura }}
+                </option>
+            @endforeach
         </select>
-        @error('estado')
-            <span class="text-sm text-red-600">{{ $message }}</span>
-        @enderror
+        <x-input-error for="id_asignatura" class="mt-2" :messages="$errors->get('id_asignatura')" />
     </div>
 
+    <!-- Campo para el nombre de la encuesta -->
     <div>
-        <label for="enlace_encuesta" class="block text-sm font-medium text-gray-700">Enlace Encuesta</label>
-        <input id="enlace_encuesta" name="enlace_encuesta" type="url" 
-            value="{{ old('enlace_encuesta', $encuesta?->enlace_encuesta) }}" 
-            autocomplete="enlace_encuesta" placeholder="Enlace Encuesta" 
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
-        @error('enlace_encuesta')
-            <span class="text-sm text-red-600">{{ $message }}</span>
-        @enderror
+        <x-label for="nombre_encuesta" :value="__('Nombre de la Encuesta')" />
+        <x-input id="nombre_encuesta" name="nombre_encuesta" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                 :value="old('nombre_encuesta', $encuesta?->nombre_encuesta)" autocomplete="nombre_encuesta"
+                 placeholder="Escribe el nombre de la encuesta" />
+        <x-input-error for="nombre_encuesta" class="mt-2" :messages="$errors->get('nombre_encuesta')" />
     </div>
 
-    <div class="mt-4">
-        <button type="submit" 
-            class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            Guardar
-        </button>
+    <!-- Campo oculto para el docente que crea la encuesta -->
+    <input type="hidden" name="creado_por" value="{{ Auth()->user()->docente->id }}">
+
+    <!-- Lista de preguntas disponibles -->
+    <div>
+        <x-label :value="__('Preguntas disponibles')" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach ($preguntas as $pregunta)
+                <label for="pregunta_{{ $pregunta->id }}" 
+                       class="block border rounded-lg p-4 shadow-sm bg-white cursor-pointer hover:ring-2 hover:ring-indigo-500 hover:shadow-lg transition 
+                              group focus-within:ring-2 focus-within:ring-indigo-500"
+                       x-data="{ selected: false }"
+                       :class="{ 'border-indigo-500 hover:border-indigo-500 ring-2 ring-cyan-500': selected }">
+                    <input type="checkbox" id="pregunta_{{ $pregunta->id }}" name="preguntas[]" value="{{ $pregunta->id }}" 
+                           class="hidden"
+                           x-model="selected"
+                           {{ in_array($pregunta->id, old('preguntas', [])) ? 'checked' : '' }}>
+                    <h5 class="font-semibold text-lg text-gray-700">{{ $pregunta->enunciado }}</h5>
+                    @if ($pregunta->opciones->isNotEmpty())
+                        <ul class="mt-2 space-y-1 text-sm text-gray-600 list-disc list-inside ">
+                            @foreach ($pregunta->opciones as $opcion)
+                                <li>{{ $opcion->opcion }}</li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <p class="text-sm text-gray-500 italic">No hay opciones disponibles para esta pregunta.</p>
+                    @endif
+                </label>
+            @endforeach
+        </div>
+        <x-input-error for="preguntas" class="mt-2" :messages="$errors->get('preguntas')" />
+    </div>
+
+    <!-- Botón para enviar el formulario -->
+    <div class="flex items-center gap-4">
+        <x-button>Crear Encuesta</x-button>
     </div>
 </div>
