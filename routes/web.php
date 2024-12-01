@@ -71,13 +71,16 @@ Route::resource('encuesta-pregunta', EncuestaPreguntumController::class);
 //RESPUESTAS
 Route::resource('respuestas', RespuestaController::class);
 
-// Muestra el formulario para responder la encuesta
-Route::get('/encuestas/{uuid}/responder', [EncuestaController::class, 'responder'])->name('encuestas.responder');
 
-// Almacena las respuestas
-Route::post('/encuestas/{uuid}/respuestas', [RespuestaController::class, 'store'])->name('respuestas.store');
+Route::middleware(['auth', 'role:estudiante'])->group(function () {
+    // Muestra el formulario para responder la encuesta
+    Route::get('/encuestas/{uuid}/responder', [EncuestaController::class, 'responder'])->name('encuestas.responder');
 
-Route::middleware(['auth', 'role:docente'])->group(function () {
+    // Almacena las respuestas
+    Route::post('/encuestas/{uuid}/respuestas', [RespuestaController::class, 'store'])->name('respuestas.store');
+});
+
+Route::middleware(['auth', 'role:admin,docente'])->group(function () {
     //muestra las respuestas
     Route::get('/encuestas/{id}/respuestas', [RespuestaController::class, 'show'])->name('respuestas.show');
 });
