@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create') }} Pregunta
+            {{ __('Crear') }} Pregunta
         </h2>
     </x-slot>
 
@@ -11,21 +11,70 @@
                 <div class="w-full">
                     <div class="sm:flex sm:items-center">
                         <div class="sm:flex-auto">
-                            <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Create') }} Pregunta</h1>
-                            <p class="mt-2 text-sm text-gray-700">Add a new {{ __('Pregunta') }}.</p>
+                            <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Crear') }} Pregunta</h1>
+                            <p class="mt-2 text-sm text-gray-700">Agrega una nueva {{ __('Pregunta') }}.</p>
                         </div>
                         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                            <a type="button" href="{{ route('preguntas.index') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Back</a>
+                            <a type="button" href="{{ route('preguntas.index') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                Regresar
+                            </a>
                         </div>
                     </div>
 
                     <div class="flow-root">
                         <div class="mt-8 overflow-x-auto">
                             <div class="max-w-xl py-2 align-middle">
-                                <form method="POST" action="{{ route('preguntas.store') }}"  role="form" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('preguntas.store') }}" role="form" enctype="multipart/form-data">
                                     @csrf
 
-                                    @include('pregunta.form')
+                                    <!-- Enunciado -->
+                                    <div class="mb-4">
+                                        <label for="enunciado" class="block text-sm font-medium text-gray-700">
+                                            {{ __('Enunciado') }}
+                                        </label>
+                                        <input type="text" id="enunciado" name="enunciado" value="{{ old('enunciado') }}" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
+                                        @error('enunciado')
+                                            <span class="text-sm text-red-600">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Tipo de pregunta -->
+                                    <div class="mb-4">
+                                        <label for="tipo_pregunta" class="block text-sm font-medium text-gray-700">
+                                            {{ __('Tipo de Pregunta') }}
+                                        </label>
+                                        <select id="tipo_pregunta" name="tipo_pregunta" class="form-select rounded-md shadow-sm mt-1 block w-full" required>
+                                            <option value="texto_libre">{{ __('Texto Libre') }}</option>
+                                            <option value="seleccion_simple">{{ __('Selección Simple') }}</option>
+                                            <option value="seleccion_multiple">{{ __('Selección Múltiple') }}</option>
+                                        </select>
+                                        @error('tipo_pregunta')
+                                            <span class="text-sm text-red-600">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Escala -->
+                                    <div class="mb-4">
+                                        <label for="escala" class="block text-sm font-medium text-gray-700">
+                                            {{ __('Escala') }}
+                                        </label>
+                                        <select id="escala" name="escala" class="form-select rounded-md shadow-sm mt-1 block w-full">
+                                            <option value="">{{ __('Seleccione') }}</option>
+                                            <option value="rango">{{ __('Rango') }}</option>
+                                            <option value="likert">{{ __('Likert') }}</option>
+                                            <option value="si_no">{{ __('Sí/No') }}</option>
+                                        </select>
+                                        @error('escala')
+                                            <span class="text-sm text-red-600">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Botón de crear -->
+                                    <div class="mt-6 flex justify-end">
+                                        <button type="submit" class="rounded-md bg-indigo-600 px-4 py-2 text-white font-semibold hover:bg-indigo-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600">
+                                            {{ __('Crear Pregunta') }}
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
                         </div>

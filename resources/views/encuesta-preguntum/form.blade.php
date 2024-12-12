@@ -27,6 +27,6 @@
 
     <!-- Botón de envío -->
     <div class="flex items-center gap-4">
-        <x-button>Submit</x-button>
+        <x-button>Guardar</x-button>
     </div>
 </div>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $opcione->name ?? __('Show') . " " . __('Opcione') }}
+            {{ $opcione->name ?? __('Mostrar') . " " . __('Opciones') }}
         </h2>
     </x-slot>
 
@@ -11,11 +11,11 @@
                 <div class="w-full">
                     <div class="sm:flex sm:items-center">
                         <div class="sm:flex-auto">
-                            <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Show') }} Opcione</h1>
-                            <p class="mt-2 text-sm text-gray-700">Details of {{ __('Opcione') }}.</p>
+                            <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Mostrar') }} Opciones</h1>
+                            <p class="mt-2 text-sm text-gray-700">Detalles de {{ __('Opciones') }}.</p>
                         </div>
                         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                            <a type="button" href="{{ route('opciones.index') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Back</a>
+                            <a type="button" href="{{ route('opciones.index') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Regresar</a>
                         </div>
                     </div>
 
