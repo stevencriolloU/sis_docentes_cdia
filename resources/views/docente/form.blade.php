@@ -12,6 +12,6 @@
     </div>
 
     <div class="flex items-center gap-4">
-        <x-button>Submit</x-primary-button>
+        <x-button>Guardar</x-primary-button>
     </div>
 </div>

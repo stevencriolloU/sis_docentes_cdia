@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\PreguntaOpcion;
+use App\Models\Pregunta;
+use App\Models\Opcione;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\PreguntaOpcionRequest;
@@ -16,6 +18,7 @@ class PreguntaOpcionController extends Controller
      */
     public function index(Request $request): View
     {
+        // Obtener todos los registros de PreguntaOpcion con sus relaciones de pregunta y opción
         $preguntaOpcions = PreguntaOpcion::with(['pregunta', 'opcion'])->paginate();
 
         return view('pregunta-opcion.index', compact('preguntaOpcions'))
@@ -25,11 +28,14 @@ class PreguntaOpcionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create()
     {
-        $preguntaOpcion = new PreguntaOpcion();
-
-        return view('pregunta-opcion.create', compact('preguntaOpcion'));
+        // Obtener todas las preguntas y opciones desde la base de datos
+        $preguntas = Pregunta::all();
+        $opciones = Opcione::all();
+    
+        // Pasar las preguntas y opciones a la vista
+        return view('pregunta-opcion.create', compact('preguntas', 'opciones'));
     }
 
     /**
@@ -37,8 +43,10 @@ class PreguntaOpcionController extends Controller
      */
     public function store(PreguntaOpcionRequest $request): RedirectResponse
     {
+        // Crear una nueva PreguntaOpcion usando los datos validados
         PreguntaOpcion::create($request->validated());
 
+        // Redirigir al listado con un mensaje de éxito
         return Redirect::route('pregunta-opcions.index')
             ->with('success', 'PreguntaOpcion created successfully.');
     }
@@ -48,8 +56,10 @@ class PreguntaOpcionController extends Controller
      */
     public function show($id): View
     {
-        $preguntaOpcion = PreguntaOpcion::find($id);
+        // Buscar la PreguntaOpcion por su ID
+        $preguntaOpcion = PreguntaOpcion::findOrFail($id);
 
+        // Mostrar la vista de detalle
         return view('pregunta-opcion.show', compact('preguntaOpcion'));
     }
 
@@ -58,9 +68,15 @@ class PreguntaOpcionController extends Controller
      */
     public function edit($id): View
     {
-        $preguntaOpcion = PreguntaOpcion::find($id);
-
-        return view('pregunta-opcion.edit', compact('preguntaOpcion'));
+        // Buscar la PreguntaOpcion por su ID
+        $preguntaOpcion = PreguntaOpcion::findOrFail($id);
+    
+        // Obtener todas las preguntas y opciones disponibles
+        $preguntas = Pregunta::all();
+        $opciones = Opcione::all(); // Obtener todas las opciones disponibles
+    
+        // Pasar las preguntas, opciones y preguntaOpcion a la vista
+        return view('pregunta-opcion.edit', compact('preguntaOpcion', 'preguntas', 'opciones'));
     }
 
     /**
@@ -68,16 +84,23 @@ class PreguntaOpcionController extends Controller
      */
     public function update(PreguntaOpcionRequest $request, PreguntaOpcion $preguntaOpcion): RedirectResponse
     {
+        // Actualizar la PreguntaOpcion con los datos validados
         $preguntaOpcion->update($request->validated());
 
+        // Redirigir al listado con un mensaje de éxito
         return Redirect::route('pregunta-opcions.index')
             ->with('success', 'PreguntaOpcion updated successfully');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy($id): RedirectResponse
     {
-        PreguntaOpcion::find($id)->delete();
+        // Buscar y eliminar la PreguntaOpcion por su ID
+        PreguntaOpcion::findOrFail($id)->delete();
 
+        // Redirigir al listado con un mensaje de éxito
         return Redirect::route('pregunta-opcions.index')
             ->with('success', 'PreguntaOpcion deleted successfully');
     }
