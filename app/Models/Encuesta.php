@@ -60,7 +60,7 @@ class Encuesta extends Model
      */
     public function preguntas()
     {
-        return $this->belongsToMany(Pregunta::class, 'encuesta_pregunta', 'id_encuesta', 'id_pregunta');
+        return $this->belongsToMany(Pregunta::class, 'encuesta_pregunta', 'encuesta_id', 'pregunta_id');
     }
 
     

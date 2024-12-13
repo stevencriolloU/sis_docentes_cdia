@@ -68,5 +68,8 @@ Route::middleware(['auth', 'role:estudiante'])->group(function () {
 
 Route::middleware(['auth', 'role:admin,docente'])->group(function () {
     //muestra las respuestas
-    Route::get('/encuestas/{id}/respuestas', [RespuestaController::class, 'show'])->name('respuestas.show');
+
 });
+
+//añadir al middleanterior
+Route::get('/encuestas/{id}/respuestas', [RespuestaController::class, 'show'])->name('respuestas.show');
