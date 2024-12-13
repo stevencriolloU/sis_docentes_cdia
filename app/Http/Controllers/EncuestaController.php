@@ -62,7 +62,7 @@ class EncuestaController extends Controller
             'nombre_encuesta' => $validated['nombre_encuesta'],
             'creado_por' => $validated['creado_por'],
             'uuid' => $uuid,
-            'enlace_encuesta' => url('/encuestas/' . $uuid),
+            'enlace_encuesta' => url('/encuestas/' . $uuid . '/responder'),
         ]);
         
         // Asociar las preguntas con la encuesta en la tabla intermedia

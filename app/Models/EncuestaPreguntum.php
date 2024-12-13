@@ -37,7 +37,7 @@ class EncuestaPreguntum extends Model
      */
     public function encuesta()
     {
-        return $this->belongsTo(\App\Models\Encuesta::class, 'id_encuesta', 'id');
+        return $this->belongsTo(Encuesta::class, 'encuesta_id', 'id');
     }
     
     /**
@@ -45,7 +45,9 @@ class EncuestaPreguntum extends Model
      */
     public function pregunta()
     {
-        return $this->belongsTo(\App\Models\Pregunta::class, 'id_pregunta', 'id');
+        return $this->belongsTo(Pregunta::class, 'pregunta_id', 'id');
     }
+
+
     
 }

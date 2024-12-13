@@ -52,9 +52,15 @@ class RespuestaController extends Controller
      */
     public function show($id)
     {
-        // Obtener la encuesta con sus preguntas y respuestas
+        /*
         $encuesta = Encuesta::with(['preguntas.respuestas.opcion', 'preguntas.respuestas.user'])
             ->findOrFail($id);
+        */
+        // Obtener la encuesta con sus preguntas y respuestas
+        $encuesta = Encuesta::with(['preguntas.respuestas.opcion'])
+            ->findOrFail($id);
+
+        //dd($encuesta->preguntas);
 
         return view('respuesta.show', compact('encuesta'));
     }        

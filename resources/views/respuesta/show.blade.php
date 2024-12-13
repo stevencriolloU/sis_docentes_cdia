@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($encuesta->preguntas as $pregunta)
+            @foreach($encuesta->preguntas as $pregunta)            
                 <tr>
                     <td>{{ $pregunta->enunciado }}</td>
                     <td>

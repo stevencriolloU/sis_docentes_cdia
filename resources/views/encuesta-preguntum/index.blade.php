@@ -13,10 +13,7 @@
                         <div class="sm:flex-auto">
                             <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Encuesta Pregunta') }}</h1>
                             <p class="mt-2 text-sm text-gray-700">Lista de {{ __('Encuestas Preguntas') }}.</p>
-                        </div>
-                        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                            <a type="button" href="{{ route('encuesta-pregunta.create') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Añadir Nuevo</a>
-                        </div>
+                        </div>                        
                     </div>
 
                     <div class="flow-root">
@@ -24,30 +21,44 @@
                             <div class="inline-block min-w-full py-2 align-middle">
                                 <table class="w-full divide-y divide-gray-300">
                                     <thead>
-                                    <tr>
-                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">No</th>
-                                        
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Id Encuesta</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Id Pregunta</th>
-
+                                    <tr>                                        
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Id Encuesta - Pregunta</th>
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Id Encuesta</th>
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Nombre de la Encuesta</th>
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Id Pregunta</th>
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Enunciado de la Pregunta </th>
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500"></th>
                                     </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-white">
                                     @foreach ($encuestaPregunta as $encuestaPreguntum)
                                         <tr class="even:bg-gray-50">
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-semibold text-gray-900">{{ ++$i }}</td>
-                                            
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuestaPreguntum->id_encuesta }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuestaPreguntum->id_pregunta }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuestaPreguntum->id}}</td>
 
+
+                                            <!-- Mostrar ID ENCUESTA y NOMBRE ENCUESTA solo cuando cambie el encuesta_id -->
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                @if ($loop->first || $encuestaPreguntum->encuesta_id != $encuestaPregunta[$loop->index - 1]->encuesta_id)
+                                                    {{ $encuestaPreguntum->encuesta->id }}
+                                                @else
+                                                    &nbsp;
+                                                @endif
+                                            </td>
+
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                @if ($loop->first || $encuestaPreguntum->encuesta_id != $encuestaPregunta[$loop->index - 1]->encuesta_id)
+                                                    {{ $encuestaPreguntum->encuesta->nombre_encuesta }}
+                                                @else
+                                                    &nbsp;
+                                                @endif
+                                            </td>
+
+                                            <!-- Siempre mostrar ID PREGUNTA y ENUNCIADO -->
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuestaPreguntum->pregunta_id}}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuestaPreguntum->pregunta->enunciado ?? 'Sin Enunciado'}}</td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
                                                 <form action="{{ route('encuesta-pregunta.destroy', $encuestaPreguntum->id) }}" method="POST">
                                                     <a href="{{ route('encuesta-pregunta.show', $encuestaPreguntum->id) }}" class="text-gray-600 font-bold hover:text-gray-900 mr-2">{{ __('Mostrar') }}</a>
-                                                    <a href="{{ route('encuesta-pregunta.edit', $encuestaPreguntum->id) }}" class="text-indigo-600 font-bold hover:text-indigo-900  mr-2">{{ __('Editar') }}</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <a href="{{ route('encuesta-pregunta.destroy', $encuestaPreguntum->id) }}" class="text-red-600 font-bold hover:text-red-900" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;">{{ __('Eliminar') }}</a>
                                                 </form>
                                             </td>
                                         </tr>

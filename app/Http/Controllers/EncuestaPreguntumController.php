@@ -18,7 +18,7 @@ class EncuestaPreguntumController extends Controller
      */
     public function index(Request $request): View
     {
-        $encuestaPregunta = EncuestaPreguntum::paginate();
+        $encuestaPregunta = EncuestaPreguntum::with(['encuesta', 'pregunta'])->paginate();
 
         return view('encuesta-preguntum.index', compact('encuestaPregunta'))
             ->with('i', ($request->input('page', 1) - 1) * $encuestaPregunta->perPage());
@@ -30,7 +30,7 @@ class EncuestaPreguntumController extends Controller
     public function create(): View
     {
         $encuestaPreguntum = new EncuestaPreguntum();
-        $encuestas = Encuesta::all(); // O aplica filtros si es necesario
+        $encuestas = Encuesta::all();
         $preguntas = Pregunta::all();
 
         return view('encuesta-preguntum.create', compact('encuestaPreguntum', 'encuestas','preguntas'));
