@@ -12,7 +12,11 @@
                     <div class="sm:flex sm:items-center">
                         <div class="sm:flex-auto">
                             <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Encuesta Pregunta') }}</h1>
-                            <p class="mt-2 text-sm text-gray-700">Lista de {{ __('Encuestas Preguntas') }}.</p>
+                            <p class="mt-2 text-sm text-gray-700">
+                                Lista de relaciones entre encuestas y preguntas. 
+                                <br>A continuación se presenta una lista de las pregunats presentes en cada encuesta
+
+                            </p>
                         </div>                        
                     </div>
 
