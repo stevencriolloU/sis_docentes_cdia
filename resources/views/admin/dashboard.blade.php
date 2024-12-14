@@ -110,6 +110,30 @@
                 </a>
             </div>
 
+            <!-- Reportes del Admin -->
+            <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-semibold mb-4">Reportes</h3>
+                    <p class="text-gray-600 mb-4">Accede a los reportes de actividades de docentes y estudiantes.</p>
+
+                    <!-- Reportes -->
+                    <div class="space-y-4">
+                        <a href="{{ route('reporte.index') }}" 
+                            class="inline-flex items-center px-6 py-2 bg-green-500 text-white border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300 ease-in-out">
+                            Reporte Conexiones Docente
+                        </a>
+
+                        <a href="{{ route('reporte.docente.novedades') }}" 
+                            class="inline-flex items-center px-6 py-2 bg-green-500 text-white border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300 ease-in-out">
+                            Reporte Novedades Docente
+                        </a>
+
+                        <a href="{{ route('reporte.estudiantes.conexiones') }}" 
+                            class="inline-flex items-center px-6 py-2 bg-green-500 text-white border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300 ease-in-out">
+                            Reporte Estudiantes
+                        </a>
+                    </div>
+
+
         </div>
     </div>
 </div>

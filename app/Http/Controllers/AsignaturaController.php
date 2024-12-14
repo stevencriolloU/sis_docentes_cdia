@@ -18,9 +18,11 @@ class AsignaturaController extends Controller
      */
     public function index(Request $request): View
     {
-        $asignaturas = Asignatura::paginate();
+        $asignaturas = Asignatura::with('docente', 'curso')->paginate();
+        $docentes = Docente::with('user')->get()->pluck('user.name', 'id');
+        $cursos = Curso::pluck('semestre', 'id');
 
-        return view('asignatura.index', compact('asignaturas'))
+        return view('asignatura.index', compact('asignaturas', 'docentes', 'cursos'))
             ->with('i', ($request->input('page', 1) - 1) * $asignaturas->perPage());
     }
 

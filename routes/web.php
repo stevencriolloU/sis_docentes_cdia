@@ -13,6 +13,7 @@ use App\Http\Controllers\OpcioneController;
 use App\Http\Controllers\PreguntaController;
 use App\Http\Controllers\PreguntaOpcionController;
 use App\Http\Controllers\RespuestaController;
+use App\Http\Controllers\ReporteController;
 
 
 Route::get('/', function () {
@@ -73,3 +74,14 @@ Route::middleware(['auth', 'role:admin,docente'])->group(function () {
 
 //añadir al middleanterior
 Route::get('/encuestas/{id}/respuestas', [RespuestaController::class, 'show'])->name('respuestas.show');
+
+    // Reporte de novedades de asistencia del docente
+    Route::get('/reporte/docente/novedades', [ReporteController::class, 'novedadesDocente'])
+        ->name('reporte.docente.novedades');
+
+    // Reporte de conexiones de estudiantes por rango de fechas y docente
+    Route::get('/reporte/estudiantes/conexiones', [ReporteController::class, 'conexionesEstudiantes'])
+        ->name('reporte.estudiantes.conexiones');
+
+        Route::get('/reporte/docente/conexiones', [ReporteController::class, 'conexionesDocente'])
+        ->name('reporte.index');
