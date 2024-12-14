@@ -58,6 +58,6 @@
 
     <!-- Botón para enviar el formulario -->
     <div class="flex items-center gap-4">
-        <x-button>Crear Encuesta</x-button>
+        <x-button>Guardar</x-button>
     </div>
 </div>

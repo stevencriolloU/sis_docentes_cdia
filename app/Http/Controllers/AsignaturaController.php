@@ -55,11 +55,12 @@ class AsignaturaController extends Controller
      * Display the specified resource.
      */
     public function show($id): View
-    {
-        $asignatura = Asignatura::find($id);
+{
+    $asignatura = Asignatura::with('docente.user','curso')->find($id);
 
-        return view('asignatura.show', compact('asignatura'));
-    }
+    return view('asignatura.show', compact('asignatura'));
+}
+
 
     /**
      * Show the form for editing the specified resource.

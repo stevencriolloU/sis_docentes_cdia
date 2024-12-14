@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $encuesta->name ?? __('Mostrar') . " " . __('Encuesta') }}
+            {{ $encuesta->nombre_encuesta ?? __('Mostrar') . " " . __('Encuesta') }}
         </h2>
     </x-slot>
 
@@ -12,7 +12,7 @@
                     <div class="sm:flex sm:items-center">
                         <div class="sm:flex-auto">
                             <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Mostrar') }} Encuesta</h1>
-                            <p class="mt-2 text-sm text-gray-700">Detalles de {{ __('Encuestas') }}.</p>
+                            <p class="mt-2 text-sm text-gray-700">Detalles de {{ __('Encuesta') }}.</p>
                         </div>
                         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                             <a type="button" href="{{ route('encuestas.index') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Volver</a>
@@ -25,33 +25,42 @@
                                 <div class="mt-6 border-t border-gray-100">
                                     <dl class="divide-y divide-gray-100">
                                         
-                                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900">Id Asignatura</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $encuesta->id_asignatura }}</dd>
-                                </div>
-                                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900">Nombre Encuesta</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $encuesta->nombre_encuesta }}</dd>
-                                </div>
-                                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900">Fecha Creacion</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $encuesta->fecha_creacion }}</dd>
-                                </div>
-                                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900">Creado Por</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $encuesta->creado_por }}</dd>
-                                </div>
-                                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900">Enlace Encuesta</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $encuesta->enlace_encuesta }}</dd>
-                                </div>
+                                        <!-- Id Asignatura -->
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6 text-gray-900">Nombre de la Asignatura</dt>
+                                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $encuesta->asignatura->nombre_asignatura ?? 'N/A' }}</dd>
+                                        </div>
+                                        
+                                        <!-- Nombre Encuesta -->
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6 text-gray-900">Nombre Encuesta</dt>
+                                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $encuesta->nombre_encuesta }}</dd>
+                                        </div>
+
+                                        <!-- Fecha de Creación -->
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6 text-gray-900">Fecha Creacion</dt>
+                                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $encuesta->fecha_creacion }}</dd>
+                                        </div>
+
+                                        <!-- Creado Por -->
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6 text-gray-900">Creado Por</dt>
+                                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $encuesta->docente->user->name ?? 'N/A' }}</dd>
+                                        </div>
+
+                                        <!-- Enlace Encuesta -->
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6 text-gray-900">Enlace Encuesta</dt>
+                                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $encuesta->enlace_encuesta }}</dd>
+                                        </div>
 
                                     </dl>
                                 </div>
+
                                 <a type="button" href="{{ route('respuestas.show', $encuesta->id) }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                     Ver Respuestas
                                 </a>
-
                             </div>
                         </div>
                     </div>

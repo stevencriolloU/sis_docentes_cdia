@@ -12,10 +12,10 @@
                     <div class="sm:flex sm:items-center">
                         <div class="sm:flex-auto">
                             <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Asignaturas') }}</h1>
-                            <p class="mt-2 text-sm text-gray-700">Lista de {{ __('Asignaturas') }}.</p>
+                            <p class="mt-2 text-sm text-gray-700">Lista de {{ __('Asignaturas') }} Disponibles.</p>
                         </div>
                         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                            <a type="button" href="{{ route('asignaturas.create') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Añadir Nueva</a>
+                            <a type="button" href="{{ route('asignaturas.create') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Añadir Nueva Asignatura</a>
                         </div>
                     </div>
 
@@ -26,12 +26,10 @@
                                     <thead>
                                     <tr>
                                         <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">No</th>
-                                        
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Id Docente</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Id Curso</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Nombre Asignatura</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Periodo</th>
-
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Docente</th>
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Curso</th>
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Nombre de la Asignatura</th>
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Periodo</th>
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500"></th>
                                     </tr>
                                     </thead>
@@ -39,16 +37,14 @@
                                     @foreach ($asignaturas as $asignatura)
                                         <tr class="even:bg-gray-50">
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-semibold text-gray-900">{{ ++$i }}</td>
-                                            
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $asignatura->id_docente }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $asignatura->id_curso }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $asignatura->nombre_asignatura }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $asignatura->periodo }}</td>
-
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $asignatura->docente->user->name ?? 'Sin asignar' }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $asignatura->curso->semestre ?? 'Sin asignar' }} - {{ $asignatura->curso->paralelo ?? '' }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $asignatura->nombre_asignatura }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $asignatura->periodo }}</td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
                                                 <form action="{{ route('asignaturas.destroy', $asignatura->id) }}" method="POST">
                                                     <a href="{{ route('asignaturas.show', $asignatura->id) }}" class="text-gray-600 font-bold hover:text-gray-900 mr-2">{{ __('Mostrar') }}</a>
-                                                    <a href="{{ route('asignaturas.edit', $asignatura->id) }}" class="text-indigo-600 font-bold hover:text-indigo-900  mr-2">{{ __('Editar') }}</a>
+                                                    <a href="{{ route('asignaturas.edit', $asignatura->id) }}" class="text-indigo-600 font-bold hover:text-indigo-900 mr-2">{{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="{{ route('asignaturas.destroy', $asignatura->id) }}" class="text-red-600 font-bold hover:text-red-900" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;">{{ __('Eliminar') }}</a>

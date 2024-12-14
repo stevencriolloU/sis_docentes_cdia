@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Encuesta;
+use App\Models\Asignatura;
+use App\Models\Pregunta;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\EncuestaRequest;
@@ -89,9 +91,12 @@ class EncuestaController extends Controller
     public function edit($id): View
     {
         $encuesta = Encuesta::find($id);
-
-        return view('encuesta.edit', compact('encuesta'));
+        $asignaturas = Asignatura::all();  // Obtener todas las asignaturas
+        $preguntas = Pregunta::all();  // Obtener todas las preguntas
+    
+        return view('encuesta.edit', compact('encuesta', 'asignaturas', 'preguntas'));  // Pasar asignaturas y preguntas a la vista
     }
+    
 
     /**
      * Update the specified resource in storage.

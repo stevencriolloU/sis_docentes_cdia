@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\PreguntaOpcion;
 use App\Models\Pregunta;
+use App\Models\PreguntaOpcion;
+
 use App\Models\Opcione;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -29,14 +29,15 @@ class PreguntaOpcionController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        // Obtener todas las preguntas y opciones desde la base de datos
-        $preguntas = Pregunta::all();
-        $opciones = Opcione::all();
+{
+    // Obtener todas las preguntas y opciones desde la base de datos
+    $preguntas = Pregunta::all(); 
+    $opciones = Opcione::all();
     
-        // Pasar las preguntas y opciones a la vista
-        return view('pregunta-opcion.create', compact('preguntas', 'opciones'));
-    }
+    // Pasar las preguntas y opciones a la vista
+    return view('pregunta-opcion.create', compact('preguntas', 'opciones'));
+}
+
 
     /**
      * Store a newly created resource in storage.
