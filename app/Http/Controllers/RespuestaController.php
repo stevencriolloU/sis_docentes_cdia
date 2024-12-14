@@ -52,15 +52,11 @@ class RespuestaController extends Controller
      */
     public function show($id)
     {
-        /*
-        $encuesta = Encuesta::with(['preguntas.respuestas.opcion', 'preguntas.respuestas.user'])
-            ->findOrFail($id);
-        */
-        // Obtener la encuesta con sus preguntas y respuestas
-        $encuesta = Encuesta::with(['preguntas.respuestas.opcion'])
-            ->findOrFail($id);
-
-        //dd($encuesta->preguntas);
+        // Obtener la encuesta con sus preguntas y respuestas asociadas
+        $encuesta = Encuesta::with(['preguntas.respuestas' => function($query) use ($id) {
+            $query->where('id_encuesta', $id); // Filtrar respuestas asociadas a la encuesta
+        }, 'preguntas.respuestas.opcion'])
+        ->findOrFail($id); // Obtener encuesta o abortar si no existe
 
         return view('respuesta.show', compact('encuesta'));
     }        
