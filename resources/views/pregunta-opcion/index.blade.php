@@ -29,8 +29,8 @@
                                         
 									    <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Pregunta Id</th>
 									    <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Enunciado</th>
-                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Opcion Id</th>
-									    <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Opcion</th>
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Opción</th>
+									    
 
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500"></th>
                                     </tr>
@@ -42,7 +42,6 @@
                                             
 										    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $preguntaOpcion->pregunta_id }}</td>
 										    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $preguntaOpcion->pregunta->enunciado }}</td>
-										    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $preguntaOpcion->opcion_id }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $preguntaOpcion->opcion->opcion }}</td>
 
 

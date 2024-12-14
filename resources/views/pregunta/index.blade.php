@@ -12,10 +12,10 @@
                     <div class="sm:flex sm:items-center">
                         <div class="sm:flex-auto">
                             <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Preguntas') }}</h1>
-                            <p class="mt-2 text-sm text-gray-700">Lisa de {{ __('Preguntas') }}.</p>
+                            <p class="mt-2 text-sm text-gray-700">Lisa de {{ __('Preguntas') }} Existentes.</p>
                         </div>
                         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                            <a type="button" href="{{ route('preguntas.create') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Añadir Nueva</a>
+                            <a type="button" href="{{ route('preguntas.create') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Añadir Nueva Pregunta</a>
                         </div>
                     </div>
 

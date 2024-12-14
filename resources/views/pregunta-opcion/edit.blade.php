@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Update') }} Pregunta Opcion
+            {{ __('Editar') }} Pregunta Opcion
         </h2>
     </x-slot>
 
@@ -11,11 +11,13 @@
                 <div class="w-full">
                     <div class="sm:flex sm:items-center">
                         <div class="sm:flex-auto">
-                            <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Update') }} Pregunta Opcion</h1>
-                            <p class="mt-2 text-sm text-gray-700">Update existing {{ __('Pregunta Opcion') }}.</p>
+                            <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Actualizar') }} Pregunta Opcion</h1>
+                            <p class="mt-2 text-sm text-gray-700">Actualizar {{ __('Pregunta Opcion') }} Existente.</p>
                         </div>
                         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                            <a type="button" href="{{ route('pregunta-opcions.index') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Back</a>
+                            <a href="{{ route('pregunta-opcions.index') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                Regresar
+                            </a>
                         </div>
                     </div>
 
@@ -23,7 +25,7 @@
                         <div class="mt-8 overflow-x-auto">
                             <div class="max-w-xl py-2 align-middle">
                                 <form method="POST" action="{{ route('pregunta-opcions.update', $preguntaOpcion->id) }}" role="form" enctype="multipart/form-data">
-                                    {{ method_field('PATCH') }}
+                                    @method('PATCH')
                                     @csrf
 
                                     <!-- Pregunta -->
@@ -32,12 +34,13 @@
                                             {{ __('Pregunta') }}
                                         </label>
                                         <select id="pregunta_id" name="pregunta_id" class="form-input rounded-md shadow-sm mt-1 block w-full">
-                                            @foreach ($preguntas as $pregunta)
-                                                <option value="{{ $pregunta->id }}" {{ old('pregunta_id', $preguntaOpcion->pregunta_id) == $pregunta->id ? 'selected' : '' }}>
-                                                    {{ $pregunta->pregunta }}
-                                                </option>
-                                            @endforeach
+                                        @foreach ($preguntas as $pregunta)
+                                            <option value="{{ $pregunta->id }}">
+                                                {{ $pregunta->enunciado }}  
+                                            </option>
+                                        @endforeach
                                         </select>
+
                                         @error('pregunta_id')
                                             <span class="text-sm text-red-600">{{ $message }}</span>
                                         @enderror
@@ -62,7 +65,7 @@
 
                                     <div class="mt-6 flex justify-end">
                                         <button type="submit" class="rounded-md bg-indigo-600 px-4 py-2 text-white font-semibold hover:bg-indigo-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600">
-                                            {{ __('Update Pregunta Opcion') }}
+                                            {{ __('Actualizar Pregunta Opcion') }}
                                         </button>
                                     </div>
                                 </form>

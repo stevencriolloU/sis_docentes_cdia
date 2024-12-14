@@ -26,12 +26,11 @@
                                     <thead>
                                     <tr>
                                         <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">No</th>
-                                        
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Id Asignatura</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Nombre Encuesta</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Fecha Creacion</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Creado Por</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Enlace Encuesta</th>
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Nombre de la Asignatura</th>
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Nombre Encuesta</th>
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Fecha Creacion</th>
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Creado Por</th>
+                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Enlace Encuesta</th>
 
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500"></th>
                                     </tr>
@@ -41,16 +40,25 @@
                                         <tr class="even:bg-gray-50">
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-semibold text-gray-900">{{ ++$i }}</td>
                                             
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->id_asignatura }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->nombre_encuesta }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->fecha_creacion }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->creado_por }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->enlace_encuesta }}</td>
+                                            <!-- Mostrar nombre de la asignatura -->
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->asignatura->nombre_asignatura ?? 'N/A' }}</td>
+                                            
+                                            <!-- Mostrar nombre de la encuesta -->
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->nombre_encuesta }}</td>
+                                            
+                                            <!-- Mostrar fecha de creación -->
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->fecha_creacion }}</td>
+                                            
+                                            <!-- Mostrar nombre del creador -->
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->docente->user->name ?? 'N/A' }}</td>
+                                            
+                                            <!-- Mostrar enlace de la encuesta -->
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->enlace_encuesta }}</td>
 
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
                                                 <form action="{{ route('encuestas.destroy', $encuesta->id) }}" method="POST">
                                                     <a href="{{ route('encuestas.show', $encuesta->id) }}" class="text-gray-600 font-bold hover:text-gray-900 mr-2">{{ __('Mostrar') }}</a>
-                                                    <a href="{{ route('encuestas.edit', $encuesta->id) }}" class="text-indigo-600 font-bold hover:text-indigo-900  mr-2">{{ __('Editar') }}</a>
+                                                    <a href="{{ route('encuestas.edit', $encuesta->id) }}" class="text-indigo-600 font-bold hover:text-indigo-900 mr-2">{{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="{{ route('encuestas.destroy', $encuesta->id) }}" class="text-red-600 font-bold hover:text-red-900" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;">{{ __('Eliminar') }}</a>
