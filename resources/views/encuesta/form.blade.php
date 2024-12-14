@@ -42,7 +42,7 @@
                            {{ in_array($pregunta->id, old('preguntas', [])) ? 'checked' : '' }}>
                     <h5 class="font-semibold text-lg text-gray-700">{{ $pregunta->enunciado }}</h5>
                     @if ($pregunta->opciones->isNotEmpty())
-                        <ul class="mt-2 space-y-1 text-sm text-gray-600 list-disc list-inside ">
+                        <ul class="mt-2 space-y-1 text-sm text-gray-600 list-disc list-inside">
                             @foreach ($pregunta->opciones as $opcion)
                                 <li>{{ $opcion->opcion }}</li>
                             @endforeach
@@ -58,6 +58,36 @@
 
     <!-- Botón para enviar el formulario -->
     <div class="flex items-center gap-4">
-        <x-button>Guardar</x-button>
+        <x-button type="submit" onclick="return validateForm()">Crear Encuesta</x-button>
     </div>
 </div>
+
+<script>
+    function validateForm() {
+        // Validación de la asignatura
+        let asignatura = document.getElementById('id_asignatura').value;
+        if (!asignatura) {
+            alert('Por favor, selecciona una asignatura.');
+            return false;
+        }
+
+        // Validación del nombre de la encuesta
+        let nombreEncuesta = document.getElementById('nombre_encuesta').value;
+        if (!nombreEncuesta.trim()) {
+            alert('El nombre de la encuesta no puede estar vacío.');
+            return false;
+        }
+
+        // Validación de las preguntas seleccionadas
+        let preguntas = document.querySelectorAll('input[name="preguntas[]"]:checked');
+        if (preguntas.length === 0) {
+            alert('Debes seleccionar al menos una pregunta.');
+            return false;
+        }
+
+        // Si todo está bien, el formulario se enviará
+        return true;
+    }
+</script>
+
+
