@@ -47,9 +47,6 @@ class RespuestaController extends Controller
         return view('respuesta.thankyou');
     }
 
-    /** 
-     * Display the specified resource.
-     */
     public function show($id)
     {
         // Obtener la encuesta con sus preguntas y respuestas asociadas
@@ -59,5 +56,47 @@ class RespuestaController extends Controller
         ->findOrFail($id); // Obtener encuesta o abortar si no existe
 
         return view('respuesta.show', compact('encuesta'));
-    }        
+    }
+    /** 
+     * Display the specified resource.
+     */
+    public function visualshow($id)
+    {
+        // Obtener la encuesta con las preguntas, respuestas asociadas y sus opciones
+        $encuesta = Encuesta::with(['preguntas.respuestas' => function($query) use ($id) {
+            $query->where('id_encuesta', $id); // Filtrar las respuestas asociadas a la encuesta
+        }, 'preguntas.respuestas.opcion'])
+        ->findOrFail($id); // Obtener encuesta o abortar si no existe
+
+        // Definir los colores para los gráficos
+        $chartColors = ['#FF5733', '#33FF57', '#3357FF', '#FF33F6']; // Define tus colores
+
+        // Preparar los datos para el gráfico
+        $chartData = [];
+
+        // Recorremos cada pregunta de la encuesta
+        foreach ($encuesta->preguntas as $pregunta) {
+            $answers = [];
+
+            // Agrupamos las respuestas por opción y contamos cuántas veces se seleccionó cada una
+            $respuestaCount = $pregunta->respuestas->groupBy(function($respuesta) {
+                return $respuesta->opcion->opcion; // Agrupar por la opción
+            });
+
+            // Contamos las respuestas por cada opción
+            foreach ($respuestaCount as $opcion => $respuestas) {
+                $answers[$opcion] = $respuestas->count(); // Contamos cuántas veces se seleccionó cada opción
+            }
+
+            // Almacenamos la pregunta y sus respuestas con el conteo en el array
+            $chartData[] = [
+                'question' => $pregunta->enunciado,
+                'answers' => $answers,
+            ];
+        }
+
+        // Pasamos los datos a la vista
+        return view('respuesta.visualshow', compact('encuesta', 'chartData', 'chartColors'));
+    }
+        
 }
