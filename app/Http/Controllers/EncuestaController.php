@@ -20,12 +20,20 @@ class EncuestaController extends Controller
      */
     public function index(Request $request): View
     {
-        $encuestas = Encuesta::paginate();
+        // Obtener el docente autenticado
+        $docenteId = auth()->user()->docente->id ?? 0;
 
+        // Verificar si el usuario tiene el rol de admin
+        if (auth()->user()->hasRole('admin')) {
+            // Si es admin, obtener todas las encuestas
+            $encuestas = Encuesta::paginate();
+        } else {
+            // Si no es admin, filtrar las encuestas creadas por el docente autenticado
+            $encuestas = Encuesta::where('creado_por', $docenteId)->paginate();
+        }
         return view('encuesta.index', compact('encuestas'))
             ->with('i', ($request->input('page', 1) - 1) * $encuestas->perPage());
     }
-
     /**
      * Show the form for creating a new resource.
      */

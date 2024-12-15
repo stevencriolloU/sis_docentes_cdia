@@ -73,3 +73,5 @@ Route::middleware(['auth', 'role:admin,docente'])->group(function () {
 
 //añadir al middleanterior
 Route::get('/encuestas/{id}/respuestas', [RespuestaController::class, 'show'])->name('respuestas.show');
+// Nueva ruta para la vista con gráficos
+Route::get('/encuestas/{id}/respuestas/graficos', [RespuestaController::class, 'visualShow'])->name('respuestas.visualshow');
