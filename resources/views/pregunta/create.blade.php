@@ -32,7 +32,7 @@
                                         <label for="enunciado" class="block text-sm font-medium text-gray-700">
                                             {{ __('Enunciado') }}
                                         </label>
-                                        <input type="text" id="enunciado" name="enunciado" value="{{ old('enunciado') }}" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
+                                        <input type="text" id="enunciado" name="enunciado" value="{{ old('enunciado') }}" class="form-input rounded-md shadow-sm mt-1 block w-full" placeholder="Escribe el enunciado aquí" required>
                                         @error('enunciado')
                                             <span class="text-sm text-red-600">{{ $message }}</span>
                                         @enderror
@@ -43,10 +43,16 @@
                                         <label for="tipo_pregunta" class="block text-sm font-medium text-gray-700">
                                             {{ __('Tipo de Pregunta') }}
                                         </label>
-                                        <select id="tipo_pregunta" name="tipo_pregunta" class="form-select rounded-md shadow-sm mt-1 block w-full" required>
-                                            <option value="texto_libre">{{ __('Texto Libre') }}</option>
-                                            <option value="seleccion_simple">{{ __('Selección Simple') }}</option>
-                                            <option value="seleccion_multiple">{{ __('Selección Múltiple') }}</option>
+                                        <select id="tipo_pregunta" name="tipo_pregunta" class="form-select rounded-md shadow-sm mt-1 block w-full" required onchange="toggleEscala(this.value)">
+                                            <option value="texto_libre" {{ old('tipo_pregunta') === 'texto_libre' ? 'selected' : '' }}>
+                                                {{ __('Texto Libre') }}
+                                            </option>
+                                            <option value="seleccion_simple" {{ old('tipo_pregunta') === 'seleccion_simple' ? 'selected' : '' }}>
+                                                {{ __('Selección Simple') }}
+                                            </option>
+                                            <option value="seleccion_multiple" {{ old('tipo_pregunta') === 'seleccion_multiple' ? 'selected' : '' }}>
+                                                {{ __('Selección Múltiple') }}
+                                            </option>
                                         </select>
                                         @error('tipo_pregunta')
                                             <span class="text-sm text-red-600">{{ $message }}</span>
@@ -54,15 +60,23 @@
                                     </div>
 
                                     <!-- Escala -->
-                                    <div class="mb-4">
+                                    <div class="mb-4" id="escala-section">
                                         <label for="escala" class="block text-sm font-medium text-gray-700">
                                             {{ __('Escala') }}
                                         </label>
                                         <select id="escala" name="escala" class="form-select rounded-md shadow-sm mt-1 block w-full">
-                                            <option value="">{{ __('Seleccione') }}</option>
-                                            <option value="rango">{{ __('Rango') }}</option>
-                                            <option value="likert">{{ __('Likert') }}</option>
-                                            <option value="si_no">{{ __('Sí/No') }}</option>
+                                            <option value="" {{ old('escala') === '' ? 'selected' : '' }}>
+                                                {{ __('Seleccione') }}
+                                            </option>
+                                            <option value="rango" {{ old('escala') === 'rango' ? 'selected' : '' }}>
+                                                {{ __('Rango') }}
+                                            </option>
+                                            <option value="likert" {{ old('escala') === 'likert' ? 'selected' : '' }}>
+                                                {{ __('Likert') }}
+                                            </option>
+                                            <option value="si_no" {{ old('escala') === 'si_no' ? 'selected' : '' }}>
+                                                {{ __('Sí/No') }}
+                                            </option>
                                         </select>
                                         @error('escala')
                                             <span class="text-sm text-red-600">{{ $message }}</span>
@@ -76,6 +90,22 @@
                                         </button>
                                     </div>
                                 </form>
+
+                                <!-- Script -->
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        toggleEscala(document.getElementById('tipo_pregunta').value);
+                                    });
+
+                                    function toggleEscala(tipoPregunta) {
+                                        const escalaSection = document.getElementById('escala-section');
+                                        if (tipoPregunta === 'texto_libre') {
+                                            escalaSection.style.display = 'none';
+                                        } else {
+                                            escalaSection.style.display = 'block';
+                                        }
+                                    }
+                                </script>
                             </div>
                         </div>
                     </div>

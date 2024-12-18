@@ -61,7 +61,7 @@
             <section class="rounded-lg shadow-md p-8">                            
             
                 <h1 class="text-2xl font-bold mb-2">
-                    Bienvenido al Sistema de Seguimiento Docente
+                    Bienvenido al sistema de seguimiento docente
                 </h1>                
 
                 <div class="flex items-center">                    
@@ -127,7 +127,7 @@
         <!-- Footer -->
         <footer class="bg-gray-500 mt-12 py-4">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-                &copy; {{ date('Y') }} Sistema de Seguimiento Docente. Todos los derechos reservados.
+                &copy; {{ date('Y') }} Sistema de seguimiento docente. Todos los derechos reservados.
             </div>
         </footer>
 
