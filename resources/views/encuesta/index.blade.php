@@ -15,8 +15,20 @@
                             <p class="mt-2 text-sm text-gray-700">Lista de {{ __('Encuestas') }}.</p>
                         </div>
                         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                            <a type="button" href="{{ route('encuestas.create') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Añadir Nueva</a>
-                        </div>
+                        @if (!auth()->user()->hasRole('admin')) <!-- Si NO es admin -->
+                            <a type="button" 
+                            href="{{ route('encuestas.create') }}" 
+                            class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                Añadir Nueva
+                            </a>
+                        @else <!-- Si es admin -->
+                            <a type="button" 
+                            href="javascript:void(0);" 
+                            class="block rounded-md bg-gray-500 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm cursor-not-allowed opacity-70">
+                                Añadir nueva (solo docentes)
+                            </a>
+                        @endif
+                    </div>
                     </div>
 
                     <div class="flow-root">
@@ -58,7 +70,11 @@
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
                                                 <form action="{{ route('encuestas.destroy', $encuesta->id) }}" method="POST">
                                                     <a href="{{ route('encuestas.show', $encuesta->id) }}" class="text-gray-600 font-bold hover:text-gray-900 mr-2">{{ __('Mostrar') }}</a>
-                                                    <a href="{{ route('encuestas.edit', $encuesta->id) }}" class="text-indigo-600 font-bold hover:text-indigo-900 mr-2">{{ __('Editar') }}</a>
+                                                    
+                                                    @if (!auth()->user()->hasRole('admin')) <!-- Verifica el rol ya que solo el docente que la creó la puede editar -->
+                                                        <a href="{{ route('encuestas.edit', $encuesta->id) }}" class="text-indigo-600 font-bold hover:text-indigo-900 mr-2">{{ __('Editar') }}</a>
+                                                    @endif
+
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="{{ route('encuestas.destroy', $encuesta->id) }}" class="text-red-600 font-bold hover:text-red-900" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;">{{ __('Eliminar') }}</a>
