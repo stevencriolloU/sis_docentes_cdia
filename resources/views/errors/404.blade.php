@@ -1,11 +1,11 @@
-<!-- resources/views/errors/403.blade.php -->
+<!-- resources/views/errors/404.blade.php -->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>SISTEMA DE SEGUIMIENTO DOCENTE - Acceso Denegado</title>
+        <title>SISTEMA DE SEGUIMIENTO DOCENTE - Página no encontrada</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -52,15 +52,14 @@
         <main class="max-w-7xl mx-auto mt-8 px-4 sm:px-6 lg:px-8 flex-grow items">
             <section class="bg-gray-500 rounded-lg p-6">                            
 
-                <!-- Título con fuente personalizada -->
                 <h1 class="text-2xl font-semibold mb-2 text-red-600" style="font-family: 'Poppins', sans-serif;">
-                    Error 403: Acceso Denegado
+                    Error 404: Página no encontrada
                 </h1>
 
                 <div class="flex items-center">                    
-                    <img src="https://lh6.googleusercontent.com/proxy/rumSgkvAQPNMwibBU3y7ILHbugoo_3S-7KcktyZGwLRhQ4p7F29ivBsK7koVLgMYCv9t1VTaSQI_cyUBhzWpQguVqfJ8AVQq2ySe-FDqug" alt="Descripción de la imagen" class="h-20 w-auto">
+                    <img src="https://cdn-icons-png.flaticon.com/512/103/103085.png" alt="Página no encontrada" class="h-20 w-auto">
                     <p class="text-lg leading-relaxed flex-1 p-6">
-                        No tienes los roles correctos para acceder a esta sección. Si consideras que esto es un error, por favor contacta con el administrador del sistema.
+                        La página que estás buscando no existe o ha sido movida. Por favor, verifica la URL o regresa al inicio.
                     </p>
                 </div>
 

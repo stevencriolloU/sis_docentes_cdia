@@ -69,7 +69,7 @@ class RespuestaController extends Controller
         ->findOrFail($id); // Obtener encuesta o abortar si no existe
 
         // Definir los colores para los gráficos
-        $chartColors = ['#FF5733', '#33FF57', '#3357FF', '#FF33F6']; // Define tus colores
+        $chartColors = ['#FF5733', '#33FF57', '#3357FF', '#FF33F6']; // Define los colores
 
         // Preparar los datos para el gráfico
         $chartData = [];
@@ -98,5 +98,20 @@ class RespuestaController extends Controller
         // Pasamos los datos a la vista
         return view('respuesta.visualshow', compact('encuesta', 'chartData', 'chartColors'));
     }
-        
+
+    /**
+     * Remove the specified resource from storage.
+     */
+
+    /*
+    public function destroy($id): RedirectResponse
+    {
+        // Buscar la respuesta por su ID y la elimina
+        $respuesta = Respuesta::findOrFail($id);
+        $respuesta->delete();
+
+        // Redireccionar con un mensaje de éxito
+        return Redirect::route('respuestas.index')->with('success', 'Respuesta eliminada correctamente.');
+    }
+    */
 }
