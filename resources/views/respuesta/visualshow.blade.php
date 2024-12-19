@@ -24,6 +24,7 @@
                             <!-- Cuadro con los votos -->
                             <div class="flex-1 pl-6 max-w-xs">
                                 <div class="space-y-2">
+                                <p>Recuento de votos</p>
                                     @foreach ($chartData[$index]['answers'] as $opcion => $votos)
                                         <div class="flex items-center">
                                             <!-- Color correspondiente al segmento con un ciclo de colores -->
@@ -52,7 +53,7 @@
             @foreach ($encuesta->preguntas as $index => $pregunta)
                 const ctx{{ $pregunta->id }} = document.getElementById('chart-{{ $pregunta->id }}').getContext('2d');
                 const chart{{ $pregunta->id }} = new Chart(ctx{{ $pregunta->id }}, {
-                    type: 'bar', // Cambiado a gráfico de barras
+                    type: 'bar',
                     data: {
                         labels: {!! json_encode(array_keys($chartData[$index]['answers'])) !!}, // Usamos las opciones como etiquetas
                         datasets: [{
@@ -64,7 +65,7 @@
                         }]
                     },
                     options: {
-                        responsive: true, // Habilita la responsividad
+                        responsive: true, // Habilita el responsive del gráfico
                         maintainAspectRatio: false, // Permite el control del tamaño
                         scales: {
                             x: {
