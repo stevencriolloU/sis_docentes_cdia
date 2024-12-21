@@ -85,7 +85,7 @@
         <p><strong>Nombre de la Asignatura:</strong> {{ $encuesta->asignatura->nombre_asignatura ?? 'N/A' }}</p>
         <p><strong>Nombre Encuesta:</strong> {{ $encuesta->nombre_encuesta }}</p>
         <p><strong>Docente:</strong> {{ $encuesta->docente->user->name ?? 'N/A' }}</p>
-        <p><strong>Fecha Creación:</strong> {{ $encuesta->fecha_creacion }}</p>
+        <p><strong>Fecha Creación:</strong> {{ \Carbon\Carbon::parse($encuesta->created_at)->format('d/m/Y') }}</p>
         <p><strong>Creado Por:</strong> {{ $encuesta->docente->user->name ?? 'N/A' }}</p>
         <p><strong>Enlace Encuesta:</strong> <a href="{{ $encuesta->enlace_encuesta }}" target="_blank">{{ $encuesta->enlace_encuesta }}</a></p>
     </div>

@@ -59,7 +59,7 @@
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->nombre_encuesta }}</td>
                                             
                                             <!-- Mostrar fecha de creación -->
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->fecha_creacion }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ \Carbon\Carbon::parse($encuesta->created_at)->format('d/m/Y') }}</td>
                                             
                                             <!-- Mostrar nombre del creador -->
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->docente->user->name ?? 'N/A' }}</td>
