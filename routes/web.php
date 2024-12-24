@@ -77,3 +77,7 @@ Route::get('/encuestas/{id}/respuestas', [RespuestaController::class, 'show'])->
 Route::get('/encuestas/{id}/respuestas/graficos', [RespuestaController::class, 'visualShow'])->name('respuestas.visualshow');
 // pdf
 Route::get('/encuestas/{id}/pdf', [RespuestaController::class, 'downloadPDF'])->name('respuestas.downloadPDF');
+
+// Ruta para acceder al formulario de generación de reportes
+Route::get('/reportes', [EncuestaController::class, 'mostrarFormularioReportes'])->name('reportes.form');
+Route::post('/reportes', [EncuestaController::class, 'generarReporte'])->name('reportes.generar');

@@ -139,4 +139,38 @@ class EncuestaController extends Controller
 
         return view('encuesta.answer', compact('encuesta'));
     }
+
+        public function mostrarFormularioReportes()
+    {
+        return view('encuesta.reportes');  // Vista que contiene el formulario de reportes
+    }
+
+        public function generarReporte(Request $request)
+    {
+        // Validamos el rango de fechas
+        $validated = $request->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
+        ]);
+
+        // Obtener las encuestas dentro del rango de fechas
+        $encuestas = Encuesta::whereBetween('created_at', [$validated['fecha_inicio'], $validated['fecha_fin']])
+                            ->with(['asignatura', 'preguntas.respuestas.opcion', 'docente.user'])
+                            ->get();
+
+        // Filtrar las respuestas de la encuesta
+        $encuestasConRespuestas = $encuestas->map(function ($encuesta) {
+            $encuesta->preguntas->each(function ($pregunta) use ($encuesta) {
+                // Filtrar las respuestas que pertenecen a esta encuesta
+                $pregunta->respuestas = $pregunta->respuestas->where('id_encuesta', $encuesta->id);
+            });
+            return $encuesta;
+        });
+
+        // Pasamos las encuestas filtradas a la vista
+        return view('encuesta.reporte', compact('encuestasConRespuestas'));
+    }
+
+
+
 }
