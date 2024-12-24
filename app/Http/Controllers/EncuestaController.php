@@ -11,6 +11,7 @@ use App\Http\Requests\EncuestaRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 
 class EncuestaController extends Controller
@@ -139,25 +140,33 @@ class EncuestaController extends Controller
 
         return view('encuesta.answer', compact('encuesta'));
     }
+    //-------Generacion de reportes de encuestas por fechas--------
 
-        public function mostrarFormularioReportes()
+    public function mostrarFormularioReportes()
     {
         return view('encuesta.reportes');  // Vista que contiene el formulario de reportes
     }
 
-        public function generarReporte(Request $request)
+    public function generarReporte(Request $request)
     {
         // Validamos el rango de fechas
         $validated = $request->validate([
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
         ]);
-
+    
+        // Convertir las fechas de inicio y fin a objetos Carbon
+        $fecha_inicio = Carbon::parse($validated['fecha_inicio']);
+        $fecha_fin = Carbon::parse($validated['fecha_fin']);
+    
+        // Sumamos un día a fecha_fin para incluir todo el día
+        $fecha_fin = $fecha_fin->addDay();
+    
         // Obtener las encuestas dentro del rango de fechas
-        $encuestas = Encuesta::whereBetween('created_at', [$validated['fecha_inicio'], $validated['fecha_fin']])
+        $encuestas = Encuesta::whereBetween('created_at', [$fecha_inicio, $fecha_fin])
                             ->with(['asignatura', 'preguntas.respuestas.opcion', 'docente.user'])
                             ->get();
-
+    
         // Filtrar las respuestas de la encuesta
         $encuestasConRespuestas = $encuestas->map(function ($encuesta) {
             $encuesta->preguntas->each(function ($pregunta) use ($encuesta) {
@@ -166,8 +175,6 @@ class EncuestaController extends Controller
             });
             return $encuesta;
         });
-
-        // Pasamos las encuestas filtradas a la vista
         return view('encuesta.reporte', compact('encuestasConRespuestas'));
     }
 

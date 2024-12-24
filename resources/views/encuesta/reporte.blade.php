@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Reporte de Respuestas de Encuestas') }}
+            {{ __('Reporte por fechas de las encuestas') }}
         </h2>
     </x-slot>
 
@@ -35,7 +35,10 @@
                                             <td class="px-3 py-4 text-sm text-gray-500">
                                                 <ul class="list-disc pl-6">
                                                     @foreach($pregunta->respuestas as $respuesta)
-                                                        <li>{{ $respuesta->opcion->opcion }}</li>
+                                                        <li>
+                                                            {{ $respuesta->opcion->opcion }}
+                                                            <span class="text-gray-400 text-xs">({{ \Carbon\Carbon::parse($respuesta->fecha_respuesta)->format('d/m/Y') }})</span>
+                                                        </li>
                                                     @endforeach
                                                 </ul>
                                             </td>
