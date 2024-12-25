@@ -58,7 +58,7 @@
 
     <!-- Botón para enviar el formulario -->
     <div class="flex items-center gap-4">
-        <x-button type="submit" onclick="return validateForm()">Crear Encuesta</x-button>
+        <x-button type="submit" onclick="return validateForm()">Crear encuesta</x-button>
     </div>
 </div>
 
