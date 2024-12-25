@@ -40,7 +40,7 @@
                                         <!-- Fecha de Creación -->
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6 text-gray-900">Fecha Creacion</dt>
-                                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ $encuesta->fecha_creacion }}</dd>
+                                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ \Carbon\Carbon::parse($encuesta->created_at)->format('d/m/Y') }}</dd>
                                         </div>
 
                                         <!-- Creado Por -->
@@ -58,13 +58,30 @@
                                     </dl>
                                 </div>
 
-                                <a type="button" href="{{ route('respuestas.show', $encuesta->id) }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                    Ver Respuestas
-                                
-                                </a>
-                                <a type="button" href="{{ route('respuestas.visualshow', $encuesta->id) }}" class="block rounded-md bg-indigo-500 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                    Respuestas con Graficos
-                                </a>
+                                <div class="space-y-4">
+                                        
+                                        <div class="flex space-x-2">
+                                            <a type="button" href="{{ route('respuestas.show', $encuesta->id) }}" class="block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                                Ver Respuestas
+                                            </a>
+                                            
+                                            <a type="button" href="{{ route('respuestas.downloadPDF', $encuesta->id) }}" class="block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                                Descargar PDF
+                                            </a>
+                                            
+                                            <a type="button" href="{{ route('respuestas.downloadPDF', $encuesta->id) }}" class="block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                                Descargar XLS
+                                            </a>
+                                        </div>
+
+                                        
+                                        <div class="flex justify-center">
+                                            <a type="button" href="{{ route('respuestas.visualshow', $encuesta->id) }}" class="block rounded-md bg-indigo-500 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                                Respuestas con Gráficos
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
