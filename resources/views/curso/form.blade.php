@@ -26,7 +26,10 @@
     </div>
 
     <!-- Botón de Envío -->
-    <div class="flex items-center gap-4">
-        <x-button>Guardar</x-button>
+    <div class="flex items-center gap-4 justify-center">
+        <x-button>
+            <img src="{{ asset('images/guardar.svg') }}" alt="Icono de inicio de sesión" class="h-5 w-5 mr-2">
+            Guardar
+        </x-button>
     </div>
 </div>

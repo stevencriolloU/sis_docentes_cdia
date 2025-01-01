@@ -1,10 +1,9 @@
-<div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-    <!--<x-application-logo class="block h-12 w-auto" />-->
+<div class="text-center bg-gray-800 rounded-lg shadow-sm p-6">
 
-    <h1 class="text-2xl font-semibold text-gray-800">
+    <h1 class="text-xl font-semibold text-white">
         ¡Bienvenido al sistema de gestión de encuestas!
     </h1>
-    <p class="mt-2 text-gray-600">
+    <p class="text-white mt-4">
         Aquí podrás acceder a todas las herramientas y funcionalidades para gestionar tu actividad. Explora las opciones disponibles para comenzar a trabajar de manera eficiente.
     </p>  
 </div>
