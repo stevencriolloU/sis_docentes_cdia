@@ -20,14 +20,12 @@
     <body class="font-sans antialiased">
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100">
-
+        <div class="min-h-screen bg-gray-700 flex flex-col">
             <!-- Page Heading -->
             @livewire('navigation-menu')
 
-
             @if (isset($header))
-                <header class="bg-white shadow">
+                <header class="bg-gray-800 shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -35,13 +33,21 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="bg-gray-200 flex-grow">
                 {{ $slot }}
             </main>
+
+            <!-- Footer -->
+            <footer class="bg-gray-500 py-4">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                    &copy; {{ date('Y') }} Sistema de Seguimiento Docente. Todos los derechos reservados.
+                </div>
+            </footer>
         </div>
 
         @stack('modals')
 
         @livewireScripts
     </body>
+
 </html>

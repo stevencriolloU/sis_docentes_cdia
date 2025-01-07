@@ -1,6 +1,6 @@
 <div class="space-y-6">
     <!-- Campo para seleccionar la asignatura -->
-    <div>
+    <div class="ml-2 mr-2">
         <x-label for="id_asignatura" :value="__('Asignatura')" />
         <select id="id_asignatura" name="id_asignatura" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
             <option value="">Selecciona una asignatura</option>
@@ -15,7 +15,7 @@
     </div>
 
     <!-- Campo para el nombre de la encuesta -->
-    <div>
+    <div class="ml-2 mr-2">
         <x-label for="nombre_encuesta" :value="__('Nombre de la Encuesta')" />
         <x-input id="nombre_encuesta" name="nombre_encuesta" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                  :value="old('nombre_encuesta', $encuesta?->nombre_encuesta)" autocomplete="nombre_encuesta"
@@ -27,7 +27,7 @@
     <input type="hidden" name="creado_por" value="{{ Auth()->user()->docente->id }}">
 
     <!-- Lista de preguntas disponibles -->
-    <div>
+    <div class="ml-2 mr-2">
         <x-label :value="__('Preguntas disponibles')" />
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach ($preguntas as $pregunta)
@@ -57,8 +57,11 @@
     </div>
 
     <!-- Botón para enviar el formulario -->
-    <div class="flex items-center gap-4">
-        <x-button type="submit" onclick="return validateForm()">Crear encuesta</x-button>
+    <div class="flex justify-center gap-4">
+        <x-button type="submit" onclick="return validateForm()" class="flex items-center gap-2">
+            <img src="{{ asset('images/añadir.svg') }}" alt="Icono de inicio de sesión" class="h-4 w-4">
+            Crear Encuesta
+        </x-button>
     </div>
 </div>
 
@@ -89,5 +92,3 @@
         return true;
     }
 </script>
-
-
