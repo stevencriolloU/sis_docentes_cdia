@@ -46,5 +46,4 @@ class Docente extends Model
     {
         return $this->hasMany(\App\Models\Asignatura::class, 'id', 'id_docente');
     }
-    
 }

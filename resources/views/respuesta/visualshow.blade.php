@@ -44,6 +44,7 @@
                 </a>
             </div>
         </div>
+
     </div>
 
     <!-- Chart.js -->
@@ -91,9 +92,8 @@
                                 display: false // Desactivar la leyenda si no es necesaria
                             }
                         }
-                    }
-                });
-            @endforeach
-        });
-    </script>
+                    });
+                @endforeach
+            });
+        </script>
 </x-app-layout>

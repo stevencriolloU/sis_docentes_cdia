@@ -75,6 +75,9 @@ Route::middleware(['auth', 'role:admin,docente'])->group(function () {
 Route::get('/encuestas/{id}/respuestas', [RespuestaController::class, 'show'])->name('respuestas.show');
 // Nueva ruta para la vista con gráficos
 Route::get('/encuestas/{id}/respuestas/graficos', [RespuestaController::class, 'visualShow'])->name('respuestas.visualshow');
+
+//welcome de tony
+Route::get('/', function () {return view('welcome');})->name('welcome');
 // pdf
 Route::get('/encuestas/{id}/pdf', [RespuestaController::class, 'downloadPDF'])->name('respuestas.downloadPDF');
 
