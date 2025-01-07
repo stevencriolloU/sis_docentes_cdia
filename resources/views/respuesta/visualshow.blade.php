@@ -1,122 +1,99 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
+            Respuestas de la Encuesta: {{ $encuesta->nombre_encuesta }}
+        </h2>
+    </x-slot>
 
-        <link rel="icon" href="https://lh6.googleusercontent.com/proxy/rumSgkvAQPNMwibBU3y7ILHbugoo_3S-7KcktyZGwLRhQ4p7F29ivBsK7koVLgMYCv9t1VTaSQI_cyUBhzWpQguVqfJ8AVQq2ySe-FDqug" type="image/png">
+    <div class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white shadow-xl sm:rounded-lg p-8 border-t-4 border-blue-500">
+                <h3 class="text-2xl font-bold mb-6 text-blue-600">Resultados de la Encuesta</h3>
 
-        <title>SISTEMA DE SEGUIMIENTO DOCENTE</title>
+                @foreach ($encuesta->preguntas as $index => $pregunta)
+                    <div class="mb-12 bg-gray-100 p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-4">{{ $pregunta->enunciado }}</h4>
 
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+                        <!-- Contenedor con los elementos centrados -->
+                        <div class="flex justify-center gap-6 items-center">
+                            <!-- Canvas de gráfico -->
+                            <div class="flex-1 flex justify-center bg-gray-50 p-4 rounded-lg shadow-md">
+                                <canvas id="chart-{{ $pregunta->id }}" width="300" height="300"></canvas>
+                            </div>
 
-        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @else
-            <style>
-                @import url('https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css');
-            </style>
-        @endif
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const errorMessage = "{{ session('error') }}";
-                if (errorMessage) {
-                    alert(errorMessage);
-                }
-            });
-        </script>
-    </head>
-
-    <x-app-layout>
-        <x-slot name="header">
-            <h2 class="font-semibold text-xl text-center text-white leading-tight">
-                Respuestas de la Encuesta: {{ $encuesta->nombre_encuesta }}
-            </h2>
-        </x-slot>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-                    <div class="bg-gray-500 rounded-lg p-6 shadow flex flex-col justify-center items-center">
-                        <div class="flex items-center justify-between sm:flex-auto">
-                            <h1 class="mt-2 font-semibold text-white">Estadistica de la Encuesta: {{ $encuesta->nombre_encuesta }}</h1>
-                            <img src="{{ asset('images/encuestas.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 ml-4">
-                        </div>
-                    </div>
-
-                    @foreach ($encuesta->preguntas as $index => $pregunta)
-                        <div class="mb-8 mt-4 text-center">
-                            <h4 class="text-lg font-semibold mb-4">{{ $pregunta->enunciado }}</h4>
-
-                            <!-- Centrado de los elementos -->
-                            <div class="flex justify-center gap-6 items-center">
-                                <!-- Canvas más pequeño -->
-                                <div class="flex-1 flex justify-center">
-                                    <canvas id="chart-{{ $pregunta->id }}" width="300" height="300"></canvas>
-                                </div>
-
-                                <!-- Cuadro con los votos -->
-                                <div class="flex-1 pl-6 max-w-xs">
-                                    <div class="space-y-2">
-                                        @foreach ($chartData[$index]['answers'] as $opcion => $votos)
-                                            <div class="flex items-center">
-                                                <!-- Color correspondiente al segmento con un ciclo de colores -->
-                                                <div class="w-4 h-4 mr-2" style="background-color: {{ $chartColors[$loop->index % count($chartColors)] }};"></div>
-                                                <!-- Texto con el conteo de votos -->
-                                                <span class="text-gray-700">{{ $opcion }} = {{ $votos }} votos</span>
-                                            </div>
-                                        @endforeach
-                                    </div>
+                            <!-- Cuadro con los votos -->
+                            <div class="flex-1 pl-8 max-w-xs pr-4">
+                                <div class="space-y-4">
+                                    <p class="text-lg font-medium text-gray-700">Recuento de votos</p>
+                                    @foreach ($chartData[$index]['answers'] as $opcion => $votos)
+                                        <div class="flex items-center space-x-2">
+                                            <!-- Color de segmento -->
+                                            <div class="w-5 h-5 rounded-full" style="background-color: {{ $chartColors[$loop->index % count($chartColors)] }};"></div>
+                                            <!-- Texto con votos -->
+                                            <span class="text-gray-600 text-sm font-medium">{{ $opcion }} = <span class="text-gray-800 font-bold">{{ $votos }}</span> votos</span>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    </div>
+                @endforeach
 
-                    <a href="{{ route('encuestas.index') }}" 
-                        class="flex justify-center mt-4 bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-md transition-all duration-300 ml-2 px-3 py-2">
-                        <img src="{{ asset('images/Regresar.svg') }}" alt="Icono de inicio de sesión" class="h-5 w-5 mr-2">
-                        Volver a Encuestas
-                    </a>
-                </div>
+                <a href="{{ route('encuestas.index') }}" class="block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    Volver a las encuestas
+                </a>
             </div>
         </div>
 
-        <!-- Chart.js -->
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                @foreach ($encuesta->preguntas as $index => $pregunta)
-                    const ctx{{ $pregunta->id }} = document.getElementById('chart-{{ $pregunta->id }}').getContext('2d');
-                    const chart{{ $pregunta->id }} = new Chart(ctx{{ $pregunta->id }}, {
-                        type: 'bar', // Cambiado a gráfico de barras
-                        data: {
-                            labels: {!! json_encode(array_keys($chartData[$index]['answers'])) !!}, // Usamos las opciones como etiquetas
-                            datasets: [{
-                                label: 'Votos',
-                                data: {!! json_encode(array_values($chartData[$index]['answers'])) !!}, // Usamos los recuentos como datos
-                                backgroundColor: {!! json_encode($chartColors) !!},
-                                borderColor: {!! json_encode($chartColors) !!},
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            responsive: true, // Habilita la responsividad
-                            maintainAspectRatio: false, // Permite el control del tamaño
-                            scales: {
-                                x: {
-                                    beginAtZero: true // Asegura que el eje X comience desde 0
-                                },
-                                y: {
-                                    beginAtZero: true // Asegura que el eje Y comience desde 0
+    </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @foreach ($encuesta->preguntas as $index => $pregunta)
+                const ctx{{ $pregunta->id }} = document.getElementById('chart-{{ $pregunta->id }}').getContext('2d');
+                const chart{{ $pregunta->id }} = new Chart(ctx{{ $pregunta->id }}, {
+                    type: 'bar',
+                    data: {
+                        labels: {!! json_encode(array_keys($chartData[$index]['answers'])) !!}, // Opciones como etiquetas
+                        datasets: [{
+                            label: 'Votos',
+                            data: {!! json_encode(array_values($chartData[$index]['answers'])) !!}, // Recuento de votos
+                            backgroundColor: {!! json_encode($chartColors) !!},
+                            borderColor: {!! json_encode($chartColors) !!},
+                            borderWidth: 1,
+                            borderRadius: 5 // Bordes redondeados
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: {
+                                    font: {
+                                        size: 14
+                                    }
                                 }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false // Desactivar la leyenda si no es necesaria
                             }
                         }
                     });
                 @endforeach
             });
         </script>
-    </x-app-layout>
-
-</html>
+</x-app-layout>

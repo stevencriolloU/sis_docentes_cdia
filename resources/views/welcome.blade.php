@@ -59,6 +59,7 @@
             @endif
         </header>
 
+
         <main class="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 p-6">
             <section class="rounded-lg shadow-md items-center justify-center p-8">                           
 
@@ -68,6 +69,7 @@
                     </h1>     
                     <p class="text-lg leading-relaxed">
                         Este sistema está diseñado para facilitar el seguimiento y la evaluación del desempeño de los docentes. 
+
                         Explore las herramientas disponibles y maximice la eficiencia de la gestión educativa.
                     </p>
                 </div>
@@ -159,7 +161,7 @@
 
         <footer class="bg-gray-500 py-4">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-                &copy; {{ date('Y') }} Sistema de Seguimiento Docente. Todos los derechos reservados.
+                &copy; {{ date('Y') }} Sistema de seguimiento docente. Todos los derechos reservados.
             </div>
         </footer>
 

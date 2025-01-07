@@ -45,18 +45,31 @@
                             </a>
                         </div>
                     </div>
+                    
+                      <!-- Ver Mis Encuestas -->
+                      <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                          <div class="p-6">
+                              <h3 class="text-xl font-semibold text-white text-center">Ver Mis Encuestas</h3>
+                              <p class="mt-2 text-white text-center">Accede a las encuestas que ya has creado. Accede a los resultados de las encuestas que ya has creado.</p>
+                              <a href="{{ route('encuestas.index') }}" 
+                                  class="mt-4 justify-center flex text-center bg-gray-500 hover:bg-green-500 text-white font-bold rounded-md transition-all duration-300 ml-2 px-3 py-2">
+                                  <img src="{{ asset('images/mostrar.svg') }}" alt="Icono de inicio de sesión" class="h-5 w-5 mr-2">
+                                  Ver Encuestas
+                              </a>
+                          </div>
+                      </div>
 
-                    <!-- Ver Mis Encuestas -->
-                    <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden">
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-white text-center">Ver Mis Encuestas</h3>
-                            <p class="mt-2 text-white text-center">Accede a las encuestas que ya has creado. Accede a los resultados de las encuestas que ya has creado.</p>
-                            <a href="{{ route('encuestas.index') }}" 
-                                class="mt-4 justify-center flex text-center bg-gray-500 hover:bg-green-500 text-white font-bold rounded-md transition-all duration-300 ml-2 px-3 py-2">
-                                <img src="{{ asset('images/mostrar.svg') }}" alt="Icono de inicio de sesión" class="h-5 w-5 mr-2">
-                                Ver Encuestas
-                            </a>
-                        </div>
+                      <!-- Ver Resultados -->
+                      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                          <div class="p-6">
+                              <h3 class="text-xl font-semibold text-gray-800">Ver Resultados</h3>
+                              <p class="mt-2 text-gray-600">Accede a los resultados de las encuestas que ya has creado.</p>
+                              <a href="{{ route('reportes.form') }}" 
+                                  class="mt-4 inline-block px-6 py-2 bg-cyan-600 text-white text-center rounded-md hover:bg-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:ring-offset-2 transition duration-200">
+                                  Ver Resultados
+                              </a>
+                          </div>
+                      </div>
                     </div>
 
                 </div>

@@ -76,4 +76,12 @@ Route::get('/encuestas/{id}/respuestas', [RespuestaController::class, 'show'])->
 // Nueva ruta para la vista con gráficos
 Route::get('/encuestas/{id}/respuestas/graficos', [RespuestaController::class, 'visualShow'])->name('respuestas.visualshow');
 
+//welcome de tony
 Route::get('/', function () {return view('welcome');})->name('welcome');
+// pdf
+Route::get('/encuestas/{id}/pdf', [RespuestaController::class, 'downloadPDF'])->name('respuestas.downloadPDF');
+
+// Ruta para acceder al formulario de generación de reportes administrador
+
+Route::get('/reportes', [EncuestaController::class, 'mostrarFormularioReportes'])->name('reportes.form');
+Route::post('/reportes', [EncuestaController::class, 'generarReporte'])->name('reportes.generar');

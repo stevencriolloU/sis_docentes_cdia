@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -36,7 +37,6 @@
                                 <h1 class="mt-2 font-semibold text-white">Añadir una nueva {{ __('encuesta') }}</h1>
                                 <img src="{{ asset('images/añadir.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 ml-4">
                             </div>
-                        </div>
 
                         <div class="flow-root">
                             <div class="mt-4 overflow-x-auto">

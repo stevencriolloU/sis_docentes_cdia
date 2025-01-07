@@ -60,7 +60,9 @@
         <main class="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 p-8">
             <section class="bg-gray-500 rounded-lg shadow-md p-8">                           
 
+
                 <h1 class="text-center text-2xl font-semibold mb-2 text-red-500 py-6" style="font-family: 'Poppins', sans-serif;">
+
                     Error 403: Acceso Denegado
                 </h1>
 

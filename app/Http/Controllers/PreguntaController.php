@@ -35,12 +35,19 @@ class PreguntaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PreguntaRequest $request): RedirectResponse
+    public function store(Request $request)
     {
-        Pregunta::create($request->validated());
+        
+        $validated = $request->validate([
+            'enunciado' => 'required|string|max:255',
+            'tipo_pregunta' => 'required|in:texto_libre,seleccion_simple,seleccion_multiple',
+            'escala' => 'nullable|in:rango,likert,si_no',
+        ]);
 
+        Pregunta::create($validated);
+        
         return Redirect::route('preguntas.index')
-            ->with('success', 'Pregunta created successfully.');
+            ->with('success', 'Pregunta creada correctamente.');
     }
 
     /**
@@ -66,9 +73,22 @@ class PreguntaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PreguntaRequest $request, Pregunta $pregunta): RedirectResponse
+    public function update(Request $request, $id)
     {
-        $pregunta->update($request->validated());
+        
+        $validated = $request->validate([
+            'enunciado' => 'required|string|max:255',
+            'tipo_pregunta' => 'required|in:texto_libre,seleccion_simple,seleccion_multiple',
+            'escala' => 'nullable|in:rango,likert,si_no',
+        ]);
+        
+        $pregunta = Pregunta::findOrFail($id);
+
+        $pregunta->update([
+            'enunciado' => $validated['enunciado'],
+            'tipo_pregunta' => $validated['tipo_pregunta'],
+            'escala' => $validated['escala'], 
+        ]);
 
         return Redirect::route('preguntas.index')
             ->with('success', 'Pregunta updated successfully');

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Encuesta;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class RespuestaController extends Controller
 {    
@@ -69,7 +70,7 @@ class RespuestaController extends Controller
         ->findOrFail($id); // Obtener encuesta o abortar si no existe
 
         // Definir los colores para los gráficos
-        $chartColors = ['#FF5733', '#33FF57', '#3357FF', '#FF33F6']; // Define tus colores
+        $chartColors = ['#FF5733', '#33FF57', '#3357FF', '#FF33F6']; // Define los colores
 
         // Preparar los datos para el gráfico
         $chartData = [];
@@ -98,5 +99,67 @@ class RespuestaController extends Controller
         // Pasamos los datos a la vista
         return view('respuesta.visualshow', compact('encuesta', 'chartData', 'chartColors'));
     }
-        
+
+
+    public function downloadPDF($id)
+    {
+        // Obtener la encuesta con las preguntas, respuestas asociadas y sus opciones
+        $encuesta = Encuesta::with([
+            'preguntas.respuestas' => function($query) use ($id) {
+                
+                $query->where('id_encuesta', $id);
+            },
+            'preguntas.respuestas.opcion' // Cargar las opciones de respuesta
+        ])
+        ->findOrFail($id); // Obtener encuesta o abortar si no existe
+
+        // Colores para los gráficos
+        $chartColors = ['#FF5733', '#33FF57', '#3357FF', '#FF33F6'];
+
+        // Preparar datos para los gráficos
+        $chartData = [];
+
+        // Recorrer las preguntas y sus respuestas filtradas
+        foreach ($encuesta->preguntas as $pregunta) {
+            $answers = [];
+
+            // Filtrar las respuestas de la pregunta actual
+            $respuestaCount = $pregunta->respuestas->groupBy(function ($respuesta) {
+                return $respuesta->opcion->opcion;
+            });
+
+            // Contabilizar las respuestas por opción
+            foreach ($respuestaCount as $opcion => $respuestas) {
+                $answers[$opcion] = $respuestas->count();
+            }
+
+            // Agregar los datos de cada pregunta a los datos de gráficos
+            $chartData[] = [
+                'question' => $pregunta->enunciado,
+                'answers' => $answers,
+            ];
+        }
+
+        // Renderizar la vista con los datos para el PDF
+        $pdf = Pdf::loadView('respuesta.pdf', compact('encuesta', 'chartData', 'chartColors'));
+
+        // Descargar el PDF con los resultados de la encuesta
+        return $pdf->download('Resultados_' . $encuesta->nombre_encuesta . '.pdf');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+
+    /*
+    public function destroy($id): RedirectResponse
+    {
+        // Buscar la respuesta por su ID y la elimina
+        $respuesta = Respuesta::findOrFail($id);
+        $respuesta->delete();
+
+        // Redireccionar con un mensaje de éxito
+        return Redirect::route('respuestas.index')->with('success', 'Respuesta eliminada correctamente.');
+    }
+    */
 }
