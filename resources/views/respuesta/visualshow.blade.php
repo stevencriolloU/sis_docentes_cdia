@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-3xl text-white leading-tight">
             Respuestas de la Encuesta: {{ $encuesta->nombre_encuesta }}
         </h2>
     </x-slot>
@@ -8,7 +8,7 @@
     <div class="py-12 bg-gray-50">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-xl sm:rounded-lg p-8 border-t-4 border-blue-500">
-                <h3 class="text-2xl font-bold mb-6 text-blue-600">Resultados de la Encuesta</h3>
+                <h3 class="text-2xl font-bold mb-6 text-white-600">Resultados de la Encuesta</h3>
 
                 @foreach ($encuesta->preguntas as $index => $pregunta)
                     <div class="mb-12 bg-gray-100 p-6 rounded-lg shadow-md">
@@ -44,7 +44,6 @@
                 </a>
             </div>
         </div>
-
     </div>
 
     <!-- Chart.js -->
@@ -92,8 +91,9 @@
                                 display: false // Desactivar la leyenda si no es necesaria
                             }
                         }
-                    });
-                @endforeach
-            });
-        </script>
+                    }
+                });
+            @endforeach
+        });
+    </script>
 </x-app-layout>

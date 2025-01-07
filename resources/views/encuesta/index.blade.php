@@ -81,11 +81,13 @@
                                                             @if (!auth()->user()->hasRole('admin')) <!-- Verifica el rol ya que solo el docente que la creó la puede editar -->
                                                                 <a href="{{ route('encuestas.edit', $encuesta->id) }}" 
                                                                    class="text-indigo-600 font-bold hover:text-indigo-900 mr-2">{{ __('Editar') }}</a>
-                                                            @endif
 
                                                             @csrf
+                                                            <!-- Verifica el rol ya que solo el docente que la creó la puede eliminar -->
                                                             @method('DELETE')
                                                             <a href="{{ route('encuestas.destroy', $encuesta->id) }}" class="text-red-600 font-bold hover:text-red-900" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;">{{ __('Eliminar') }}</a>
+                                                            @endif
+
                                                         </form>
                                                     </td>
                                                 </tr>
