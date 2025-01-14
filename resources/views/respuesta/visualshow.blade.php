@@ -4,26 +4,32 @@
             Respuestas de la Encuesta: {{ $encuesta->nombre_encuesta }}
         </h2>
     </x-slot>
-
-    <div class="py-12 bg-gray-50">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white shadow-xl sm:rounded-lg p-8 border-t-4 border-blue-500">
-                <h3 class="text-2xl font-bold mb-6 text-white-600">Resultados de la Encuesta</h3>
-
+            <div class="py-12 bg-gray-50">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white shadow-xl sm:rounded-lg p-8 border-t-4 border-blue-500">
+                        <div class="flex items-center justify-between mb-6">
+            <!-- Título -->
+            <h3 class="text-2xl font-bold text-white-600">Resultados de la Encuesta</h3>
+            
+            <!-- Botón para generar el PDF -->
+            <button onclick="generarPDF()" class="flex items-center px-4 py-2 font-bold rounded-md text-white bg-gray-800 hover:bg-gray-700 transition-all duration-300">
+                Descargar
+            </button>
+        </div>
                 @foreach ($encuesta->preguntas as $index => $pregunta)
                     <div class="mb-12 bg-gray-100 p-6 rounded-lg shadow-md">
                         <h4 class="text-xl font-semibold text-gray-800 mb-4">{{ $pregunta->enunciado }}</h4>
 
-                        <!-- Contenedor con los elementos centrados -->
-                        <div class="flex justify-center gap-6 items-center">
-                            <!-- Canvas de gráfico -->
-                            <div class="flex-1 flex justify-center bg-gray-50 p-4 rounded-lg shadow-md">
-                                <canvas id="chart-{{ $pregunta->id }}" width="300" height="300"></canvas>
+                        <!-- Contenedor de gráfico y leyenda de votos -->
+                        <div class="flex justify-center gap-6 flex-wrap items-start">
+                            <!-- Canvas de gráfico con tamaño ajustado -->
+                            <div class="w-full sm:w-1/2 lg:w-1/2 flex justify-center bg-gray-50 p-4 rounded-lg shadow-md">
+                                <canvas id="chart-{{ $pregunta->id }}" class="w-full" style="height: 530px; width: 357px; display: block; box-sizing: border-box;"></canvas>
                             </div>
 
-                            <!-- Cuadro con los votos -->
-                            <div class="flex-1 pl-8 max-w-xs pr-4">
-                                <div class="space-y-4">
+                            <!-- Cuadro con los votos decorado y más pequeño -->
+                            <div class="w-full sm:w-1/2 lg:w-1/2 pl-8 pr-4 mt-4 sm:mt-0">
+                                <div class="space-y-4 bg-gray-200 p-4 rounded-lg shadow-lg">
                                     <p class="text-lg font-medium text-gray-700">Recuento de votos</p>
                                     @foreach ($chartData[$index]['answers'] as $opcion => $votos)
                                         <div class="flex items-center space-x-2">
@@ -48,6 +54,9 @@
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             @foreach ($encuesta->preguntas as $index => $pregunta)
@@ -88,12 +97,126 @@
                         },
                         plugins: {
                             legend: {
-                                display: false // Desactivar la leyenda si no es necesaria
+                                display: true, // Mostrar leyenda
+                                position: 'top', // Posición de la leyenda
+                                labels: {
+                                    font: {
+                                        size: 12 // Tamaño de la fuente
+                                    },
+                                    boxWidth: 10 // Tamaño de los cuadros de la leyenda
+                                }
                             }
                         }
                     }
                 });
             @endforeach
         });
+
+        function generarPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        let yOffset = 10; 
+
+
+        doc.setFontSize(7);
+        doc.setTextColor(0, 51, 102);  // Color azul oscuro para el texto
+        doc.setFont("helvetica", "bold");
+        doc.text("Nombre de la Asignatura: ", 10, yOffset);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(0, 51, 102);  // Color azul claro para el valor
+        doc.text("{{ $encuesta->asignatura->nombre_asignatura ?? 'N/A' }}", 100, yOffset);
+        yOffset += 12;
+
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(0, 51, 102);  // Color azul oscuro para el texto
+        doc.text("Nombre Encuesta: ", 10, yOffset);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(0, 51, 102);  // Color azul claro para el valor
+        doc.text("{{ $encuesta->nombre_encuesta }}", 100, yOffset);
+        yOffset += 12;
+
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(0, 51, 102);  // Color azul oscuro para el texto
+        doc.text("Fecha Creación: ", 10, yOffset);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(0, 51, 102);  // Color azul claro para el valor
+        doc.text("{{ \Carbon\Carbon::parse($encuesta->created_at)->format('d/m/Y') }}", 100, yOffset);
+        yOffset += 12;
+
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(0, 51, 102);  // Color azul oscuro para el texto
+        doc.text("Creado Por: ", 10, yOffset);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(0, 51, 102);  // Color azul claro para el valor
+        doc.text("{{ $encuesta->docente->user->name ?? 'N/A' }}", 100, yOffset);
+        yOffset += 12;
+
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(0, 51, 102);  // Color azul oscuro para el texto
+        doc.text("Enlace Encuesta: ", 10, yOffset);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(0, 51, 102);  // Color azul claro para el valor
+        doc.text("{{ $encuesta->enlace_encuesta }}", 100, yOffset);
+        yOffset += 15;  // Deja un pequeño espacio antes de empezar con las preguntas
+
+        @foreach ($encuesta->preguntas as $index => $pregunta)
+            const canvas{{ $pregunta->id }} = document.getElementById('chart-{{ $pregunta->id }}');
+            const imgData{{ $pregunta->id }} = canvas{{ $pregunta->id }}.toDataURL('image/png');
+
+            doc.setFontSize(10);
+            doc.setTextColor(0, 51, 102);  // Azul oscuro
+            doc.setFont("helvetica", "bold");
+            doc.text("Pregunta: ", 10, yOffset);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(0, 51, 102);  // Azul claro
+            doc.text("{{ $pregunta->enunciado }}", 50, yOffset);
+            yOffset += 12;
+
+            doc.setFontSize(12);
+            doc.setTextColor(0, 51, 102);
+
+            
+            doc.setFont("helvetica", "bold");
+            doc.text("Recuento de votos:", 10, yOffset);
+            yOffset += 8; 
+
+            
+            doc.setFont("helvetica", "normal");
+            @foreach ($chartData[$index]['answers'] as $opcion => $votos)
+                doc.text("{{ $opcion }} = {{ $votos }} votos", 10, yOffset);
+                yOffset += 6;
+            @endforeach
+
+           
+            if (yOffset + 140 > doc.internal.pageSize.height) {
+                doc.addPage(); 
+                yOffset = 10;  
+            }
+
+            
+            doc.addImage(imgData{{ $pregunta->id }}, 'PNG', 10, yOffset, 200, 100);
+            yOffset += 130; 
+        @endforeach
+
+        // Guardar el PDF generado
+        doc.save('reporte con graficos.pdf');
+    }
     </script>
+    <!-- CSS para impresión -->
+    <style>
+        @media print {
+            
+            canvas {
+                width: 357px !important;  
+                height: 530px !important; 
+            }
+
+            
+            .chart-container {
+                max-width: 600px; 
+                margin: 0 auto;   
+            }
+        }
+    </style>
 </x-app-layout>
