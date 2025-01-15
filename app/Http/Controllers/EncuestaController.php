@@ -144,58 +144,82 @@ class EncuestaController extends Controller
     //-------Generacion de reportes de encuestas por fechas--------
 
     public function mostrarFormularioReportes()
-    {
-        return view('encuesta.reportes');  // Vista que contiene el formulario de reportes
-    }
+{
+    // Obtener todas las preguntas disponibles
+    $preguntas = Pregunta::all();
+
+    // Retornar la vista con las preguntas
+    return view('encuesta.reportes', compact('preguntas'));
+}
 
     public function generarReporte(Request $request)
 {
-    // Validamos el rango de fechas
+    // Validamos el rango de fechas y la pregunta seleccionada
     $validated = $request->validate([
         'fecha_inicio' => 'required|date',
         'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
+        'pregunta' => 'nullable|string', // Puede ser "todas" o un ID de pregunta
     ]);
 
-    // Convertir las fechas de inicio y fin a objetos Carbon
+    // Convertimos las fechas
     $fecha_inicio = Carbon::parse($validated['fecha_inicio']);
-    $fecha_fin = Carbon::parse($validated['fecha_fin']);
+    $fecha_fin = Carbon::parse($validated['fecha_fin'])->addDay(); // Incluir todo el día
 
-    // Sumamos un día a fecha_fin para incluir todo el día
-    $fecha_fin = $fecha_fin->addDay();
+    // Filtrar encuestas según el rol del usuario
+    $encuestasQuery = Auth::user()->hasRole('admin')
+        ? Encuesta::query()
+        : Encuesta::where('creado_por', Auth::user()->docente->id ?? 0);
 
-    // Verificar si el usuario autenticado es un administrador
-    if (Auth::user()->hasRole('admin')) {
-        // Si es administrador, obtenemos todas las encuestas dentro del rango de fechas
-        $encuestas = Encuesta::whereBetween('created_at', [$fecha_inicio, $fecha_fin])
-                            ->with(['asignatura', 'preguntas.respuestas.opcion', 'docente.user'])
-                            ->get();
-    } else {
-        // Verificar si el usuario tiene un docente asociado
-        if (Auth::user()->docente) {
-            $docenteId = Auth::user()->docente->id;
-            // Si es docente, solo obtenemos las encuestas creadas por él
-            $encuestas = Encuesta::where('creado_por', $docenteId)
-                                 ->whereBetween('created_at', [$fecha_inicio, $fecha_fin])
-                                 ->with(['asignatura', 'preguntas.respuestas.opcion', 'docente.user'])
-                                 ->get();
-        } else {
-            // Redirigir o manejar el caso cuando el usuario no es docente
-            return redirect()->back()->with('error', 'El usuario no está asociado a un docente.');
-        }
-    }
+    // Agregamos el rango de fechas
+    $encuestasQuery->whereBetween('created_at', [$fecha_inicio, $fecha_fin]);
 
-    // Filtrar las respuestas de la encuesta
-    $encuestasConRespuestas = $encuestas->map(function ($encuesta) {
-        $encuesta->preguntas->each(function ($pregunta) use ($encuesta) {
-            // Filtrar las respuestas que pertenecen a esta encuesta
-            $pregunta->respuestas = $pregunta->respuestas->where('id_encuesta', $encuesta->id);
-        });
-        return $encuesta;
+    // Si se seleccionó una pregunta específica, filtramos
+if ($request->pregunta !== 'todas') {
+    $encuestasQuery->whereHas('preguntas', function ($query) use ($request) {
+        $query->where('preguntas.id', $request->pregunta);
     });
+}
+
+// Obtenemos las encuestas con las relaciones necesarias
+$encuestas = $encuestasQuery->with(['asignatura', 'preguntas.respuestas.opcion', 'docente.user'])->get();
+
+// Filtrar las respuestas de la encuesta
+$encuestasConRespuestas = $encuestas->map(function ($encuesta) use ($request) {
+    $encuesta->preguntas = $encuesta->preguntas->filter(function ($pregunta) use ($request) {
+        // Si se seleccionó "todas", no filtramos las preguntas
+        if ($request->pregunta === 'todas') {
+            return true;
+        }
+
+        // De lo contrario, filtramos por la pregunta específica seleccionada
+        return $pregunta->id == $request->pregunta;
+    });
+
+    // Filtrar las respuestas relacionadas a la encuesta actual
+    $encuesta->preguntas->each(function ($pregunta) use ($encuesta) {
+        $pregunta->respuestas = $pregunta->respuestas->where('id_encuesta', $encuesta->id);
+
+        // Contar las respuestas por opción
+        $pregunta->recuento_respuestas = $pregunta->respuestas->groupBy('opcion.opcion')->map(function ($respuestasPorOpcion, $opcion) {
+            return [
+                'total' => $respuestasPorOpcion->count(),
+                'detalles' => $respuestasPorOpcion->map(function ($respuesta) {
+                    return [
+                        'opcion' => $respuesta->opcion->opcion,
+                        'fecha' => \Carbon\Carbon::parse($respuesta->fecha_respuesta)->format('d/m/Y'),
+                    ];
+                }),
+            ];
+        });
+    });
+
+    return $encuesta;
+})->filter(function ($encuesta) {
+    // Eliminar encuestas sin preguntas válidas
+    return $encuesta->preguntas->isNotEmpty();
+});
 
     return view('encuesta.reporte', compact('encuestasConRespuestas'));
 }
-
-
 
 }
