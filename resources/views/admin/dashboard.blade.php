@@ -32,6 +32,10 @@
             <div class="bg-gray-200 max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-gray-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
+                <!-- Bloque  -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4">Gestionar roles</h2>
+
                 <!-- Bloque 1: Gestionar Roles -->
                     <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
                         <h3 class="text-white text-xl font-semibold mb-4">Gestionar Roles</h3>
@@ -41,6 +45,11 @@
                             <img src="{{ asset('images/Gestionar.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
                         </a>
                     </div>
+                </div>  
+
+                <!-- Bloque 2: Cursos, Docentes y Asignaturas -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4">Lista de cursos, docentes y asignaturas</h2>
 
                     <!-- Tarjeta 2: Cursos -->
                     <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
@@ -71,6 +80,11 @@
                             <img src="{{ asset('images/Asignaturas.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
                         </a>
                     </div>
+                    </div>
+
+                    <!-- Bloque 3: Encuestas -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4">Encuestas de los docentes</h2>
 
                     <!-- Tarjeta 5: Encuestas -->
                     <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
@@ -81,7 +95,10 @@
                             <img src="{{ asset('images/encuestas.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
                         </a>
                     </div>  
-
+                </div>
+                <!-- Bloque 3.2: Encuestas -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4">Reporte de los docentes</h2>
                     <!-- Tarjeta 5.2: Encuestas -->
                     <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
                         <h3 class="text-white text-xl font-semibold mb-4">Reportes</h3>
@@ -91,6 +108,10 @@
                             <img src="{{ asset('images/Informes.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
                         </a>
                     </div>
+                </div>
+                <!-- Bloque 4: Preguntas y Opciones -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4">Preguntas y opciones</h2>
 
                     <!-- Tarjeta 6: Preguntas -->
                     <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
@@ -120,6 +141,10 @@
                             <img src="{{ asset('images/pregunta-opcion.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
                         </a>
                     </div>
+                    </div>
+                    <!-- Bloque 5: Lista de Preguntas y Respuestas -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4">Lista de preguntas y respuestas de usuarios</h2>
 
                     <!-- Tarjeta 7: Lista de Preguntas -->
                     <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
@@ -140,7 +165,7 @@
                             <img src="{{ asset('images/respuesta.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
                         </a>
                     </div>
-
+                </div>
             </div>
         </div>
     </x-app-layout>
