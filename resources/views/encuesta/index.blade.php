@@ -58,7 +58,7 @@
                                                 <th scope="col" class="py-3 pl-4 pr-3 text-l font-semibold uppercase tracking-wide text-white">Fecha Creacion</th>
                                                 <th scope="col" class="py-3 pl-4 pr-3 text-l font-semibold uppercase tracking-wide text-white">Creado Por</th>
                                                 <th scope="col" class="py-3 pl-4 pr-3 text-l font-semibold uppercase tracking-wide text-white">Enlace Encuesta</th>
-                                                <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500"></th>
+                                                <th scope="col" class="px-3 py-3 text-l font-semibold uppercase tracking-wide text-white">Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody class="divide-y divide-gray-200 bg-white">
@@ -71,21 +71,27 @@
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->docente->user->name ?? 'N/A' }}</td>
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $encuesta->enlace_encuesta }}</td>
                                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
-                                                        <form action="{{ route('encuestas.destroy', $encuesta->id) }}" method="POST" class="flex justify-center">
+                                                        <form action="{{ route('encuestas.destroy', $encuesta->id) }}" method="POST" class="flex flex-col items-left" style="row-gap: 0.5rem;">
                                                             <a href="{{ route('encuestas.show', $encuesta->id) }}" 
-                                                               class="flex items-center bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-md transition-all duration-300 ml-2 px-3 py-2">
+                                                               class="flex items-center bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-md transition-all duration-300 px-3 py-2">
                                                                 <img src="{{ asset('images/mostrar.svg') }}" alt="Icono de inicio de sesión" class="h-5 w-5 mr-2">
                                                                 {{ __('Mostrar') }}
                                                             </a>
 
-                                                            @if (!auth()->user()->hasRole('admin')) <!-- Verifica el rol ya que solo el docente que la creó la puede editar -->
+                                                            @if (!auth()->user()->hasRole('admin'))
                                                                 <a href="{{ route('encuestas.edit', $encuesta->id) }}" 
-                                                                   class="text-indigo-600 font-bold hover:text-indigo-900 mr-2">{{ __('Editar') }}</a>
+                                                                   class="flex items-center bg-gray-800 hover:bg-indigo-600 text-white font-bold rounded-md transition-all duration-300 px-3 py-2">
+                                                                   <img src="{{ asset('images/editar.svg') }}" alt="Icono de inicio de sesión" class="h-5 w-5 mr-2">
+                                                                   {{ __('Editar') }}
+                                                                </a>
 
                                                             @csrf
-                                                            <!-- Verifica el rol ya que solo el docente que la creó la puede eliminar -->
                                                             @method('DELETE')
-                                                            <a href="{{ route('encuestas.destroy', $encuesta->id) }}" class="text-red-600 font-bold hover:text-red-900" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;">{{ __('Eliminar') }}</a>
+                                                            <a href="{{ route('encuestas.destroy', $encuesta->id) }}" 
+                                                                class="flex items-center bg-gray-800 hover:bg-red-600 text-white font-bold rounded-md transition-all duration-300 px-3 py-2" onclick="event.preventDefault(); confirm('¿Esta seguro que desea eliminarlo?') ? this.closest('form').submit() : false;">
+                                                                <img src="{{ asset('images/eliminar.svg') }}" alt="Icono de inicio de sesión" class="h-5 w-5 mr-2">
+                                                                {{ __('Eliminar') }}
+                                                            </a>
                                                             @endif
 
                                                         </form>

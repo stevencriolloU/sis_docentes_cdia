@@ -27,7 +27,7 @@
             </h2>
         </x-slot>
 
-        <div class="py-6">
+        <div class="py-4">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-gray-500 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
@@ -45,6 +45,13 @@
                                 Copiar
                             </button>
                             
+                        </div>
+
+                        <div class="flex items-center justify-center py-4">
+                            <a href="{{ route('welcome') }}" 
+                                class="flex items-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md transition-all duration-300">
+                                <img src="{{ asset('images/Regresar.svg') }}" alt="Icono de registro" class="h-5 w-5 mr-2">
+                                Regresar al inicio</a>
                         </div>
                     </div>
                 </div>

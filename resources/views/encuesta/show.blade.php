@@ -79,18 +79,20 @@
 
                                     <div class="space-y-4">
                                         <!-- Botones con iconos y estilo similar a "Ver Respuestas" -->
-                                        <div class="flex space-x-2">
-                                            <a type="button" href="{{ route('respuestas.downloadPDF', $encuesta->id) }}" 
-                                                class="flex justify-center mt-4 bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-md transition-all duration-300 ml-2 px-3 py-2">
-                                                <img src="{{ asset('images/pdf-icon.svg') }}" alt="Icono PDF" class="h-5 w-5 mr-2">
-                                                Descargar PDF
-                                            </a>
-                                            
-                                            <a type="button" href="{{ route('respuestas.downloadPDF', $encuesta->id) }}" 
-                                                class="flex justify-center mt-4 bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-md transition-all duration-300 ml-2 px-3 py-2">
-                                                <img src="{{ asset('images/xls-icon.svg') }}" alt="Icono XLS" class="h-5 w-5 mr-2">
-                                                Descargar XLS
-                                            </a>
+                                        <div class="flex justify-center mt-4">
+                                            <div class="flex space-x-2 w-full max-w-md ml-2">
+                                                <a type="button" href="{{ route('respuestas.downloadPDF', $encuesta->id) }}" 
+                                                    class="flex-1 flex justify-center items-center bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-md transition-all duration-300 px-3 py-2">
+                                                    <img src="{{ asset('images/pdf.svg') }}" alt="Icono PDF" class="h-5 w-5 mr-2">
+                                                    Descargar PDF
+                                                </a>
+                                                
+                                                <a type="button" href="{{ route('respuestas.downloadPDF', $encuesta->id) }}" 
+                                                    class="flex-1 flex justify-center items-center bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-md transition-all duration-300 px-3 py-2">
+                                                    <img src="{{ asset('images/xls.svg') }}" alt="Icono XLS" class="h-5 w-5 mr-2">
+                                                    Descargar XLS
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                     
