@@ -1,12 +1,19 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-white leading-tight">
             {{ __('Reporte por fechas de las encuestas') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-full mx-auto sm:px-6 lg:px-8 space-y-6">
+            <!-- Botón de impresión en la parte superior -->
+            <div class="flex justify-start mb-4">
+                <button id="imprimir" class="flex items-center px-4 py-2 font-bold rounded-md text-white bg-gray-800 hover:bg-gray-700 transition-all duration-300">
+                    Imprimir Reporte
+                </button>
+            </div>
+            
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 @if ($encuestasConRespuestas->isEmpty())
                     <!-- Mensaje cuando no hay encuestas en el rango de fechas -->
@@ -33,6 +40,7 @@
                                         <tr>
                                             <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Pregunta</th>
                                             <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Respuestas</th>
+                                            <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Recuento</th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-white">
@@ -49,6 +57,15 @@
                                                         @endforeach
                                                     </ul>
                                                 </td>
+                                                <td class="px-3 py-4 text-sm text-gray-500">
+                                                    <ul class="list-disc pl-6">
+                                                        @foreach($pregunta->recuento_respuestas as $opcion => $detalles)
+                                                            <li>
+                                                                {{ $opcion }}: {{ $detalles['total'] }}
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -60,4 +77,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Script para activar la impresión -->
+    <script>
+        document.getElementById('imprimir').addEventListener('click', function () {
+            window.print();
+        });
+    </script>
 </x-app-layout>
