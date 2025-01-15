@@ -32,6 +32,10 @@
             <div class="bg-gray-200 max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-gray-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
+                <!-- Bloque  -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4">Gestionar roles</h2>
+
                 <!-- Bloque 1: Gestionar Roles -->
                     <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
                         <h3 class="text-white text-xl font-semibold mb-4">Gestionar Roles</h3>
@@ -41,6 +45,11 @@
                             <img src="{{ asset('images/Gestionar.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
                         </a>
                     </div>
+                </div>  
+
+                <!-- Bloque 2: Cursos, Docentes y Asignaturas -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4">Lista de cursos, docentes y asignaturas</h2>
 
                     <!-- Tarjeta 2: Cursos -->
                     <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
@@ -65,23 +74,31 @@
                     <!-- Tarjeta 4: Asignaturas -->
                    <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
                         <h3 class="text-white text-xl font-semibold mb-4">Asignaturas</h3>
-                        <p class="text-white mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
+                        <p class="text-white mb-4">Consulta y administra todas las asignaturas de un docente.</p>
                         <a href="{{ route('asignaturas.index') }}" 
                             class="inline-flex items-center px-6 py-2 bg-gray-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                             <img src="{{ asset('images/Asignaturas.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
                         </a>
                     </div>
+                    </div>
+
+                    <!-- Bloque 3: Encuestas -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4">Encuestas de los docentes</h2>
 
                     <!-- Tarjeta 5: Encuestas -->
                     <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
                         <h3 class="text-white text-xl font-semibold mb-4">Encuestas</h3>
-                        <p class="text-white mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
+                        <p class="text-white mb-4">Administra y consulta todas las encuestas del sistema.</p>
                         <a href="{{ route('encuestas.index') }}" 
                             class="inline-flex items-center px-6 py-2 bg-gray-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                             <img src="{{ asset('images/encuestas.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
                         </a>
                     </div>  
-
+                </div>
+                <!-- Bloque 3.2: Encuestas -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4">Reportes de los docentes</h2>
                     <!-- Tarjeta 5.2: Encuestas -->
                     <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
                         <h3 class="text-white text-xl font-semibold mb-4">Reportes</h3>
@@ -91,11 +108,15 @@
                             <img src="{{ asset('images/Informes.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
                         </a>
                     </div>
+                </div>
+                <!-- Bloque 4: Preguntas y Opciones -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4">Preguntas y opciones</h2>
 
                     <!-- Tarjeta 6: Preguntas -->
                     <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
                         <h3 class="text-white text-xl font-semibold mb-4">Preguntas</h3>
-                        <p class="text-white mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
+                        <p class="text-white mb-4">Administra y crea las preguntas del sistema.</p>
                         <a href="{{ route('preguntas.index') }}" 
                             class="inline-flex items-center px-6 py-2 bg-gray-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                             <img src="{{ asset('images/preguntas.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
@@ -105,7 +126,7 @@
                     <!-- Tarjeta 8: Opciones -->
                       <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
                         <h3 class="text-white text-xl font-semibold mb-4">Opciones de respuesta</h3>
-                        <p class="text-white mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
+                        <p class="text-white mb-4">Gestiona de forma general las opciones de respuesta.</p>
                         <a href="{{ route('opciones.index') }}" 
                             class="inline-flex items-center px-6 py-2 bg-gray-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                             <img src="{{ asset('images/opciones.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
@@ -113,18 +134,22 @@
                     </div>
                     <!-- Tarjeta 9: Pregunta-Opción -->
                     <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
-                        <h3 class="text-white text-xl font-semibold mb-4">Pregunta Opcion</h3>
-                        <p class="text-white mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
+                        <h3 class="text-white text-xl font-semibold mb-4">Asignar opciones a preguntas</h3>
+                        <p class="text-white mb-4">Asocia opciones específicas a preguntas.</p>
                         <a href="{{ route('pregunta-opcions.index') }}" 
                             class="inline-flex items-center px-6 py-2 bg-gray-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                             <img src="{{ asset('images/pregunta-opcion.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
                         </a>
                     </div>
+                    </div>
+                    <!-- Bloque 5: Lista de Preguntas y Respuestas -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4">Lista de preguntas y respuestas de usuarios</h2>
 
                     <!-- Tarjeta 7: Lista de Preguntas -->
                     <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
-                        <h3 class="text-white text-xl font-semibold mb-4">Encuesta Pregunta</h3>
-                        <p class="text-white mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
+                        <h3 class="text-white text-xl font-semibold mb-4">Lista de preguntas</h3>
+                        <p class="text-white mb-4">Consulta las preguntas incluidas en cada encuesta.</p>
                         <a href="{{ route('encuesta-pregunta.index') }}" 
                             class="inline-flex items-center px-6 py-2 bg-gray-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                             <img src="{{ asset('images/preguntas-encuesta.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
@@ -134,13 +159,13 @@
                     <!-- Tarjeta 10: Respuestas -->
                    <div class="text-center bg-gray-800 border border-gray-300 rounded-lg shadow-sm p-6">
                         <h3 class="text-white text-xl font-semibold mb-4">Respuestas de usuarios</h3>
-                        <p class="text-white mb-4">Consulta y administra todas las clases asignaturas de un docente.</p>
+                        <p class="text-white mb-4">Consulta las respuestas de los usuarios a las encuestas.</p>
                         <a href="{{ route('respuestas.index') }}" 
                             class="inline-flex items-center px-6 py-2 bg-gray-500 text-white border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out">
                             <img src="{{ asset('images/respuesta.svg') }}" alt="Icono de inicio de sesión" class="h-8 w-8 mr-2">
                         </a>
                     </div>
-
+                </div>
             </div>
         </div>
     </x-app-layout>

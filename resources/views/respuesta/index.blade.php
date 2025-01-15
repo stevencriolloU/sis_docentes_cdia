@@ -50,7 +50,6 @@
                                                 <th scope="col" class="py-3 pl-4 pr-3 text-l font-semibold uppercase tracking-wide text-white">Opción</th>
                                                 <th scope="col" class="py-3 pl-4 pr-3 text-l font-semibold uppercase tracking-wide text-white">Nombre Usuario</th>
                                                 <th scope="col" class="py-3 pl-4 pr-3 text-l font-semibold uppercase tracking-wide text-white">Fecha Respuesta</th>
-                                                <th scope="col" class="px-3 py-3 text-l font-semibold uppercase tracking-wide text-white">Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody class="divide-y divide-gray-200 bg-white">
@@ -64,11 +63,6 @@
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $respuesta->fecha_respuesta }}</td>
                                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
                                                         <form action="{{ route('respuestas.destroy', $respuesta->id) }}" method="POST" class="flex justify-center">
-                                                            <a href="{{ route('respuestas.show', $respuesta->id) }}" 
-                                                                class="flex items-center bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-md transition-all duration-300 ml-2 px-3 py-2">
-                                                                <img src="{{ asset('images/mostrar.svg') }}" alt="Icono de inicio de sesión" class="h-5 w-5 mr-2">                                                            
-                                                                {{ __('Mostrar') }}
-                                                            </a>
                                                         </form>
                                                     </td>
                                                 </tr>
