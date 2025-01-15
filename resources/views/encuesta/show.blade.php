@@ -86,12 +86,6 @@
                                                     <img src="{{ asset('images/pdf.svg') }}" alt="Icono PDF" class="h-5 w-5 mr-2">
                                                     Descargar PDF
                                                 </a>
-                                                
-                                                <a type="button" href="{{ route('respuestas.downloadPDF', $encuesta->id) }}" 
-                                                    class="flex-1 flex justify-center items-center bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-md transition-all duration-300 px-3 py-2">
-                                                    <img src="{{ asset('images/xls.svg') }}" alt="Icono XLS" class="h-5 w-5 mr-2">
-                                                    Descargar XLS
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
