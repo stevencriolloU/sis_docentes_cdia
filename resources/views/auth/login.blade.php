@@ -54,7 +54,7 @@
                                     <x-label for="email" value="{{ __('Correo') }}" class="text-white" />
                                     <x-input 
                                         id="email" 
-                                        class="block mt-1 w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" 
+                                        class="block mt-1 w-full px-4 py-3 bg-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" 
                                         type="email" 
                                         name="email" 
                                         :value="old('email')" 
@@ -67,7 +67,7 @@
                                     <x-label for="password" value="{{ __('Contraseña') }}" class="text-white" />
                                     <x-input 
                                         id="password" 
-                                        class="block mt-1 w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" 
+                                        class="block mt-1 w-full px-4 py-3 bg-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" 
                                         type="password" 
                                         name="password" 
                                         required 

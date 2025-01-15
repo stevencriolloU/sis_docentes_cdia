@@ -39,18 +39,18 @@
                         </div>
 
                         <div class="flow-root">
-                            <div class="mt-8 overflow-x-auto">
-                                <div class="inline-block min-w-full py-2 align-middle">
-                                    <table class="w-full divide-y divide-gray-300">
+                            <div class="mt-8 overflow-x-auto text-center">
+                                <div class="inline-block min-w-full py-2 text-center rounded-lg align-middle bg-gray-500">
+                                    <table class="w-full divide-y divide-gray-300 text-center">
                                         <thead>
                                             <tr>
-                                                <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">No</th>
-                                                <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Nombre Encuesta</th>
-                                                <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Enunciado Pregunta</th>
-                                                <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Opción</th>
-                                                <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Nombre Usuario</th>
-                                                <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Fecha Respuesta</th>
-                                                <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500"></th>
+                                                <th scope="col" class="py-3 pl-4 pr-3 text-l font-semibold uppercase tracking-wide text-white">No</th>
+                                                <th scope="col" class="py-3 pl-4 pr-3 text-l font-semibold uppercase tracking-wide text-white">Nombre Encuesta</th>
+                                                <th scope="col" class="py-3 pl-4 pr-3 text-l font-semibold uppercase tracking-wide text-white">Enunciado Pregunta</th>
+                                                <th scope="col" class="py-3 pl-4 pr-3 text-l font-semibold uppercase tracking-wide text-white">Opción</th>
+                                                <th scope="col" class="py-3 pl-4 pr-3 text-l font-semibold uppercase tracking-wide text-white">Nombre Usuario</th>
+                                                <th scope="col" class="py-3 pl-4 pr-3 text-l font-semibold uppercase tracking-wide text-white">Fecha Respuesta</th>
+                                                <th scope="col" class="px-3 py-3 text-l font-semibold uppercase tracking-wide text-white">Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody class="divide-y divide-gray-200 bg-white">
