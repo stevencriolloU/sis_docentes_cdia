@@ -97,13 +97,13 @@
                         },
                         plugins: {
                             legend: {
-                                display: true, // Mostrar leyenda
-                                position: 'top', // Posición de la leyenda
+                                display: true, 
+                                position: 'top', 
                                 labels: {
                                     font: {
-                                        size: 12 // Tamaño de la fuente
+                                        size: 12 
                                     },
-                                    boxWidth: 10 // Tamaño de los cuadros de la leyenda
+                                    boxWidth: 10 
                                 }
                             }
                         }
@@ -118,89 +118,77 @@
 
         let yOffset = 10; 
 
-
-        doc.setFontSize(7);
-        doc.setTextColor(0, 51, 102);  // Color azul oscuro para el texto
-        doc.setFont("helvetica", "bold");
-        doc.text("Nombre de la Asignatura: ", 10, yOffset);
+        // Estilo general del documento
         doc.setFont("helvetica", "normal");
-        doc.setTextColor(0, 51, 102);  // Color azul claro para el valor
-        doc.text("{{ $encuesta->asignatura->nombre_asignatura ?? 'N/A' }}", 100, yOffset);
-        yOffset += 12;
+        doc.setTextColor(0, 51, 102);  // Azul oscuro para el texto
 
+        // Título del documento
+        doc.setFontSize(14);
         doc.setFont("helvetica", "bold");
-        doc.setTextColor(0, 51, 102);  // Color azul oscuro para el texto
-        doc.text("Nombre Encuesta: ", 10, yOffset);
-        doc.setFont("helvetica", "normal");
-        doc.setTextColor(0, 51, 102);  // Color azul claro para el valor
-        doc.text("{{ $encuesta->nombre_encuesta }}", 100, yOffset);
-        yOffset += 12;
+        doc.text("Reporte de Encuesta", 10, yOffset);
+        yOffset += 15;
 
-        doc.setFont("helvetica", "bold");
-        doc.setTextColor(0, 51, 102);  // Color azul oscuro para el texto
-        doc.text("Fecha Creación: ", 10, yOffset);
-        doc.setFont("helvetica", "normal");
-        doc.setTextColor(0, 51, 102);  // Color azul claro para el valor
-        doc.text("{{ \Carbon\Carbon::parse($encuesta->created_at)->format('d/m/Y') }}", 100, yOffset);
-        yOffset += 12;
+        // Información general de la encuesta
+        const info = [
+            { label: "Nombre de la Asignatura", value: "{{ $encuesta->asignatura->nombre_asignatura ?? 'N/A' }}" },
+            { label: "Nombre Encuesta", value: "{{ $encuesta->nombre_encuesta }}" },
+            { label: "Fecha Creación", value: "{{ \Carbon\Carbon::parse($encuesta->created_at)->format('d/m/Y') }}" },
+            { label: "Creado Por", value: "{{ $encuesta->docente->user->name ?? 'N/A' }}" },
+            { label: "Enlace Encuesta", value: "{{ $encuesta->enlace_encuesta }}" }
+        ];
 
-        doc.setFont("helvetica", "bold");
-        doc.setTextColor(0, 51, 102);  // Color azul oscuro para el texto
-        doc.text("Creado Por: ", 10, yOffset);
-        doc.setFont("helvetica", "normal");
-        doc.setTextColor(0, 51, 102);  // Color azul claro para el valor
-        doc.text("{{ $encuesta->docente->user->name ?? 'N/A' }}", 100, yOffset);
-        yOffset += 12;
+        
+        info.forEach(item => {
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "bold");
+            doc.text(item.label + ": ", 10, yOffset);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(0, 51, 102);  // Azul claro para el valor
+            doc.text(item.value, 60, yOffset);
+            yOffset += 10;
+        });
 
-        doc.setFont("helvetica", "bold");
-        doc.setTextColor(0, 51, 102);  // Color azul oscuro para el texto
-        doc.text("Enlace Encuesta: ", 10, yOffset);
-        doc.setFont("helvetica", "normal");
-        doc.setTextColor(0, 51, 102);  // Color azul claro para el valor
-        doc.text("{{ $encuesta->enlace_encuesta }}", 100, yOffset);
-        yOffset += 15;  // Deja un pequeño espacio antes de empezar con las preguntas
+        yOffset += 15;  // Espacio antes de las preguntas
 
+        // Preguntas y respuestas
         @foreach ($encuesta->preguntas as $index => $pregunta)
             const canvas{{ $pregunta->id }} = document.getElementById('chart-{{ $pregunta->id }}');
             const imgData{{ $pregunta->id }} = canvas{{ $pregunta->id }}.toDataURL('image/png');
 
-            doc.setFontSize(10);
-            doc.setTextColor(0, 51, 102);  // Azul oscuro
+            doc.setFontSize(12);
             doc.setFont("helvetica", "bold");
             doc.text("Pregunta: ", 10, yOffset);
             doc.setFont("helvetica", "normal");
             doc.setTextColor(0, 51, 102);  // Azul claro
-            doc.text("{{ $pregunta->enunciado }}", 50, yOffset);
-            yOffset += 12;
+            doc.text("{{ $pregunta->enunciado }}", 30, yOffset);
+            yOffset += 15;
 
+            // Recuento de votos
             doc.setFontSize(12);
-            doc.setTextColor(0, 51, 102);
-
-            
             doc.setFont("helvetica", "bold");
             doc.text("Recuento de votos:", 10, yOffset);
-            yOffset += 8; 
+            yOffset += 10;
 
-            
+            // Opciones de votos
             doc.setFont("helvetica", "normal");
             @foreach ($chartData[$index]['answers'] as $opcion => $votos)
                 doc.text("{{ $opcion }} = {{ $votos }} votos", 10, yOffset);
                 yOffset += 6;
             @endforeach
 
-           
+            // Comprobación de espacio antes de añadir una nueva página
             if (yOffset + 140 > doc.internal.pageSize.height) {
                 doc.addPage(); 
                 yOffset = 10;  
             }
 
-            
-            doc.addImage(imgData{{ $pregunta->id }}, 'PNG', 10, yOffset, 200, 100);
-            yOffset += 130; 
+            // Insertar imagen de gráfico
+            doc.addImage(imgData{{ $pregunta->id }}, 'PNG', 10, yOffset, 160, 100);
+            yOffset += 120; 
         @endforeach
 
         // Guardar el PDF generado
-        doc.save('reporte con graficos.pdf');
+        doc.save('reporte_con_graficos.pdf');
     }
     </script>
     <!-- CSS para impresión -->
